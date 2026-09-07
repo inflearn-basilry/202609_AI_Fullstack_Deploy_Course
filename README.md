@@ -2,11 +2,17 @@
 
 인프런 강의 자료와 학생용 정적 자료실을 관리하는 저장소입니다.
 
+## 학생용 사이트
+
+- GitHub Pages: https://inflearn-basilry.github.io/202609_AI_Fullstack_Deploy_Course/
+- `main` 브랜치에 변경사항을 올리면 GitHub Actions가 `dist/`를 자동 배포합니다.
+
 ## 구조
 
 - `dist/index.html`: 학생용 자료실 첫 화면
 - `dist/materials/`: 강의 슬라이드, 스크립트·스토리보드, 커리큘럼, 디자인 시스템
-- `.openai/hosting.json`: 정적 사이트 배포 설정
+- `.github/workflows/deploy-pages.yml`: GitHub Pages 자동 배포 설정
+- `.openai/hosting.json`: 기존 ChatGPT Sites 배포 설정
 
 ## 현재 공개 강의
 
