@@ -10,7 +10,8 @@
 ## 구조
 
 - `dist/index.html`: 학생용 자료실 첫 화면
-- `dist/materials/`: 강의 슬라이드, 스크립트·스토리보드, 커리큘럼, 디자인 시스템
+- `dist/materials/`: 학생용 강의 슬라이드, 커리큘럼, 디자인 시스템
+- `production/`: 제작용 스크립트·스토리보드. GitHub Pages 배포 대상에서 제외됩니다. 공개 저장소에서는 파일 자체가 공개될 수 있습니다.
 - `.github/workflows/deploy-pages.yml`: GitHub Pages 자동 배포 설정
 - `.openai/hosting.json`: 기존 ChatGPT Sites 배포 설정
 
