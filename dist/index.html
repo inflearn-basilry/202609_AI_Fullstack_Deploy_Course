@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI 에이전트로 프로덕션 풀스택 출시하기 강의 자료실">
+  <meta name="theme-color" content="#10233f">
+  <title>AI 에이전트로 프로덕션 풀스택 출시하기</title>
+  <style>
+    :root {
+      --navy: #10233f;
+      --navy-deep: #0a172b;
+      --paper: #f6f2e9;
+      --lime: #b7d75d;
+      --cyan: #57c8d4;
+      --coral: #ef765f;
+      --line: rgba(16, 35, 63, .16);
+      --muted: #637087;
+      --shadow: 0 24px 70px rgba(16, 35, 63, .12);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--navy);
+      background: var(--paper);
+      font-family: "Noto Sans KR", Pretendard, "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+      line-height: 1.65;
+      word-break: keep-all;
+    }
+
+    a { color: inherit; }
+
+    .shell {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid rgba(246, 242, 233, .14);
+      color: var(--paper);
+      background: rgba(10, 23, 43, .92);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar .shell {
+      min-height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 11px;
+      font-size: 14px;
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      color: var(--navy-deep);
+      background: var(--lime);
+      font: 900 12px/1 Consolas, monospace;
+    }
+
+    .topbar small { color: rgba(246, 242, 233, .58); font-size: 12px; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 650px;
+      padding: 88px 0 92px;
+      color: var(--paper);
+      background: var(--navy);
+    }
+
+    .hero > .shell {
+      display: grid;
+      grid-template-columns: 1.16fr .84fr;
+      align-items: center;
+      gap: 74px;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 620px;
+      height: 620px;
+      right: -260px;
+      top: -320px;
+      border: 1px solid rgba(87, 200, 212, .28);
+      border-radius: 50%;
+      box-shadow: 0 0 0 82px rgba(87, 200, 212, .05), 0 0 0 164px rgba(246, 242, 233, .025);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 23px;
+      color: var(--cyan);
+      font: 850 13px/1.2 Consolas, monospace;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before { content: ""; width: 28px; height: 3px; border-radius: 99px; background: currentColor; }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 25px;
+      font-size: clamp(50px, 6vw, 82px);
+      line-height: 1.02;
+      letter-spacing: -.06em;
+    }
+
+    h1 span { color: var(--lime); }
+
+    .hero-copy > p {
+      max-width: 700px;
+      margin-bottom: 34px;
+      color: rgba(246, 242, 233, .68);
+      font-size: 19px;
+    }
+
+    .button-row { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    .button {
+      min-height: 50px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 20px;
+      border: 1px solid rgba(246, 242, 233, .24);
+      border-radius: 10px;
+      color: var(--paper);
+      font-size: 15px;
+      font-weight: 800;
+      text-decoration: none;
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+
+    .button.primary { border-color: var(--lime); color: var(--navy-deep); background: var(--lime); }
+    .button:hover, .button:focus-visible { transform: translateY(-2px); border-color: var(--cyan); outline: none; }
+
+    .hero-map {
+      position: relative;
+      z-index: 1;
+      padding: 32px;
+      border: 1px solid rgba(246, 242, 233, .17);
+      background: rgba(246, 242, 233, .065);
+      box-shadow: 0 34px 70px rgba(0, 0, 0, .2);
+    }
+
+    .map-label { display: block; margin-bottom: 24px; color: var(--lime); font: 800 12px/1 Consolas, monospace; letter-spacing: .1em; }
+
+    .map-step {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 15px;
+      padding: 17px 0;
+      border-top: 1px solid rgba(246, 242, 233, .13);
+    }
+
+    .map-step b { color: var(--cyan); font: 800 14px/1.4 Consolas, monospace; }
+    .map-step strong { display: block; font-size: 17px; }
+    .map-step small { color: rgba(246, 242, 233, .54); }
+
+    main { padding: 84px 0 112px; }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 28px;
+      align-items: start;
+      margin-bottom: 30px;
+    }
+
+    .section-index { padding-top: 8px; color: #278d98; font: 850 13px/1.3 Consolas, monospace; letter-spacing: .08em; }
+
+    h2 { margin-bottom: 12px; font-size: clamp(34px, 4vw, 52px); line-height: 1.1; letter-spacing: -.045em; }
+    .section-head p { max-width: 740px; margin-bottom: 0; color: var(--muted); }
+
+    .lesson-card {
+      display: grid;
+      grid-template-columns: 170px 1fr auto;
+      gap: 28px;
+      align-items: center;
+      padding: 30px;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--lime);
+      background: #fffdf8;
+      box-shadow: var(--shadow);
+    }
+
+    .lesson-no { font: 900 58px/1 Consolas, monospace; letter-spacing: -.05em; }
+    .lesson-copy h3 { margin-bottom: 8px; font-size: 26px; letter-spacing: -.03em; }
+    .lesson-copy p { margin-bottom: 0; color: var(--muted); }
+    .lesson-meta { display: block; margin-top: 10px; color: #278d98; font: 750 12px/1.4 Consolas, monospace; letter-spacing: .05em; }
+    .lesson-card .button { color: var(--navy); border-color: var(--navy); white-space: nowrap; }
+    .lesson-card .button:hover { color: var(--navy-deep); border-color: var(--lime); background: var(--lime); }
+
+    .resources { margin-top: 90px; }
+
+    .resource-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .resource {
+      min-height: 230px;
+      padding: 28px;
+      border-right: 1px solid var(--line);
+      text-decoration: none;
+      transition: color .18s ease, background .18s ease;
+    }
+
+    .resource:last-child { border-right: 0; }
+    .resource:hover, .resource:focus-visible { color: var(--navy-deep); background: rgba(183, 215, 93, .18); outline: none; }
+    .resource small { display: block; margin-bottom: 34px; color: #278d98; font: 800 12px/1 Consolas, monospace; letter-spacing: .08em; }
+    .resource h3 { margin-bottom: 12px; font-size: 22px; }
+    .resource p { margin-bottom: 0; color: var(--muted); font-size: 15px; }
+
+    footer { padding: 28px 0 42px; border-top: 1px solid var(--line); color: var(--muted); font-size: 12px; }
+    footer .shell { display: flex; justify-content: space-between; gap: 20px; }
+
+    @media (max-width: 860px) {
+      .hero { min-height: auto; padding: 70px 0; }
+      .hero > .shell { grid-template-columns: 1fr; }
+      .hero-map { max-width: 620px; }
+      .section-head, .lesson-card { grid-template-columns: 1fr; }
+      .lesson-no { font-size: 38px; }
+      .lesson-card .button { justify-self: start; }
+      .resource-list { grid-template-columns: 1fr; }
+      .resource { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
+      .resource:last-child { border-bottom: 0; }
+    }
+
+    @media (max-width: 520px) {
+      .shell { width: min(100% - 28px, 1180px); }
+      .topbar small { display: none; }
+      .hero { padding: 54px 0 62px; }
+      .hero-map { padding: 22px; }
+      main { padding: 62px 0 84px; }
+      .lesson-card { padding: 24px; }
+      footer .shell { flex-direction: column; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .button, .resource { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="shell">
+      <a class="brand" href="./"><span class="brand-mark">AI</span><span>FULLSTACK DEPLOY COURSE</span></a>
+      <small>강의 자료 · 2026.09</small>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="shell">
+      <div class="hero-copy">
+        <span class="eyebrow">AI agent × production</span>
+        <h1>AI 에이전트로<br><span>프로덕션 풀스택</span><br>출시하기</h1>
+        <p>코드 생성에서 멈추지 않고, 테스트·배포·운영 증거가 남는 서비스 출시 과정을 함께 완성합니다.</p>
+        <div class="button-row">
+          <a class="button primary" href="materials/2026-09-07_0-1_이_강의가_해결하는_문제_강의슬라이드_v0.1.html">0-1 강의 시작</a>
+          <a class="button" href="#materials">전체 자료 보기</a>
+        </div>
+      </div>
+      <aside class="hero-map" aria-label="강의 작업 흐름">
+        <span class="map-label">DEFINITION OF DONE</span>
+        <div class="map-step"><b>01</b><div><strong>범위를 작게 고정</strong><small>이번 주에 끝낼 핵심 행동</small></div></div>
+        <div class="map-step"><b>02</b><div><strong>AI와 변경을 반복</strong><small>목표·제약·diff·테스트·기록</small></div></div>
+        <div class="map-step"><b>03</b><div><strong>출시 증거를 남김</strong><small>TEST · PUBLIC URL · RUN LOG · RUNBOOK</small></div></div>
+      </aside>
+    </div>
+  </section>
+
+  <main class="shell" id="materials">
+    <section aria-labelledby="lessons-title">
+      <div class="section-head">
+        <div class="section-index">01 / LESSONS</div>
+        <div><h2 id="lessons-title">강의 슬라이드</h2><p>슬라이드는 방향키로 이동합니다. 발표자 노트는 <strong>N</strong>, 전체화면은 <strong>F</strong> 키로 열 수 있습니다.</p></div>
+      </div>
+      <article class="lesson-card">
+        <div class="lesson-no">0-1</div>
+        <div class="lesson-copy">
+          <h3>이 강의가 해결하는 문제</h3>
+          <p>AI가 코드를 만드는 속도와 서비스를 실제로 출시하는 능력 사이의 간극을 진단합니다.</p>
+          <span class="lesson-meta">8 SLIDES · 05:00 · HTML PRESENTATION</span>
+        </div>
+        <a class="button" href="materials/2026-09-07_0-1_이_강의가_해결하는_문제_강의슬라이드_v0.1.html">슬라이드 열기</a>
+      </article>
+    </section>
+
+    <section class="resources" aria-labelledby="resources-title">
+      <div class="section-head">
+        <div class="section-index">02 / MATERIALS</div>
+        <div><h2 id="resources-title">함께 보는 자료</h2><p>강의의 전체 구조와 장면별 설명, 시각 규칙을 확인할 수 있습니다.</p></div>
+      </div>
+      <div class="resource-list">
+        <a class="resource" href="materials/2026-09-07_AI_풀스택_서비스_출시_강의_커리큘럼_v0.1.md">
+          <small>CURRICULUM</small><h3>전체 강의 커리큘럼</h3><p>섹션과 강의별 목표, 결과물, 진행 순서를 담은 원본 문서입니다.</p>
+        </a>
+        <a class="resource" href="materials/2026-09-07_0-1_이_강의가_해결하는_문제_스크립트_스토리보드_v0.1.html">
+          <small>STORYBOARD</small><h3>0-1 스크립트·스토리보드</h3><p>전체 내레이션과 타임코드, 장면별 화면 지시를 확인합니다.</p>
+        </a>
+        <a class="resource" href="materials/2026-09-07_AI_풀스택_강의_디자인시스템_v0.1.html">
+          <small>DESIGN SYSTEM</small><h3>강의 디자인 시스템</h3><p>색상·타이포·그리드·슬라이드 마스터의 공통 규칙입니다.</p>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell"><span>AI 에이전트로 프로덕션 풀스택 출시하기</span><span>COURSE MATERIALS · v0.1</span></div>
+  </footer>
+</body>
+</html>

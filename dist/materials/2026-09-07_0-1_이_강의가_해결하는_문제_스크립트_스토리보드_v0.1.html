@@ -1,0 +1,990 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="AI 에이전트로 프로덕션 풀스택 출시하기 0-1 수업의 강의 스크립트와 영상 스토리보드">
+  <title>0-1. 이 강의가 해결하는 문제 — 스크립트 &amp; 스토리보드 v0.1</title>
+  <style>
+    :root {
+      --ink: #17233f;
+      --muted: #65718b;
+      --paper: #f6f2e9;
+      --surface: #fffdf8;
+      --navy: #10233f;
+      --blue: #2f64d6;
+      --cyan: #57c8d4;
+      --coral: #ef765f;
+      --lime: #b7d75d;
+      --line: #d9d5ca;
+      --shadow: 0 18px 50px rgba(16, 35, 63, .10);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 3%, rgba(87, 200, 212, .18), transparent 24rem),
+        radial-gradient(circle at 95% 14%, rgba(239, 118, 95, .13), transparent 22rem),
+        var(--paper);
+      font-family: Pretendard, "Noto Sans KR", "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+      line-height: 1.68;
+      word-break: keep-all;
+    }
+
+    a { color: inherit; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(23, 35, 63, .12);
+      background: rgba(246, 242, 233, .88);
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar-inner {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      min-height: 62px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: -.01em;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      color: white;
+      background: var(--navy);
+      box-shadow: 4px 4px 0 var(--cyan);
+    }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    nav a {
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    nav a:hover { color: var(--ink); background: white; }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 54px 0 100px;
+    }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      min-height: 490px;
+      display: grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap: 42px;
+      align-items: end;
+      padding: clamp(34px, 6vw, 72px);
+      border-radius: 32px;
+      color: white;
+      background: var(--navy);
+      box-shadow: var(--shadow);
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      right: -100px;
+      top: -150px;
+      border: 1px solid rgba(255, 255, 255, .25);
+      border-radius: 50%;
+      box-shadow: 0 0 0 54px rgba(87, 200, 212, .08), 0 0 0 108px rgba(255, 255, 255, .04);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 20px;
+      color: var(--cyan);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 26px;
+      height: 3px;
+      border-radius: 10px;
+      background: currentColor;
+    }
+
+    h1, h2, h3, p { margin-top: 0; }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 24px;
+      font-size: clamp(42px, 7vw, 78px);
+      line-height: .98;
+      letter-spacing: -.065em;
+    }
+
+    h1 span { color: var(--lime); }
+
+    .hero-lead {
+      max-width: 680px;
+      margin-bottom: 0;
+      color: rgba(255,255,255,.76);
+      font-size: clamp(16px, 2vw, 21px);
+      line-height: 1.55;
+    }
+
+    .hero-card {
+      position: relative;
+      padding: 24px;
+      border: 1px solid rgba(255,255,255,.17);
+      border-radius: 20px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .hero-card .duration {
+      display: block;
+      color: var(--lime);
+      font-size: 52px;
+      font-weight: 900;
+      line-height: 1;
+      letter-spacing: -.05em;
+    }
+
+    .hero-card p { margin: 12px 0 0; color: rgba(255,255,255,.72); font-size: 13px; }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin: 18px 0 66px;
+    }
+
+    .meta-card {
+      min-height: 120px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(255,253,248,.82);
+    }
+
+    .meta-card small {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .meta-card strong { display: block; font-size: 16px; line-height: 1.45; }
+
+    section { scroll-margin-top: 86px; margin-top: 74px; }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 24px;
+      margin-bottom: 28px;
+      align-items: start;
+    }
+
+    .section-index {
+      padding-top: 6px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: .12em;
+    }
+
+    h2 {
+      margin-bottom: 8px;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.08;
+      letter-spacing: -.045em;
+    }
+
+    .section-head p { max-width: 740px; margin-bottom: 0; color: var(--muted); }
+
+    .outcome {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .panel {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 8px 24px rgba(16, 35, 63, .05);
+    }
+
+    .panel h3 { margin-bottom: 14px; font-size: 18px; letter-spacing: -.02em; }
+
+    .big-quote {
+      position: relative;
+      padding-left: 24px;
+      font-size: clamp(20px, 2.5vw, 28px);
+      font-weight: 850;
+      line-height: 1.42;
+      letter-spacing: -.025em;
+    }
+
+    .big-quote::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 4px;
+      bottom: 4px;
+      width: 6px;
+      border-radius: 20px;
+      background: var(--coral);
+    }
+
+    .checklist { margin: 0; padding: 0; list-style: none; }
+
+    .checklist li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 8px;
+      padding: 9px 0;
+      border-bottom: 1px dashed var(--line);
+    }
+
+    .checklist li:last-child { border-bottom: 0; }
+
+    .checklist li::before {
+      content: "✓";
+      color: var(--blue);
+      font-weight: 900;
+    }
+
+    .script-grid { display: grid; gap: 16px; }
+
+    .script-block {
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 24px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    .timecode {
+      position: sticky;
+      top: 86px;
+      align-self: start;
+      padding: 10px 12px;
+      border-radius: 12px;
+      color: white;
+      background: var(--navy);
+      text-align: center;
+      font-variant-numeric: tabular-nums;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: .03em;
+    }
+
+    .script-body h3 { margin-bottom: 6px; font-size: 17px; }
+
+    .intent {
+      display: inline-block;
+      margin-bottom: 14px;
+      color: var(--blue);
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .narration {
+      margin-bottom: 15px;
+      color: #202b44;
+      font-size: 17px;
+      line-height: 1.85;
+    }
+
+    .direction {
+      margin: 0;
+      padding: 13px 16px;
+      border-left: 4px solid var(--cyan);
+      border-radius: 0 10px 10px 0;
+      color: var(--muted);
+      background: #f2faf9;
+      font-size: 13px;
+    }
+
+    .direction b { color: var(--ink); }
+
+    .storyboard {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .scene {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+      box-shadow: 0 9px 24px rgba(16,35,63,.05);
+    }
+
+    .scene-visual {
+      position: relative;
+      min-height: 235px;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      padding: 26px;
+      color: white;
+      background: var(--navy);
+    }
+
+    .scene:nth-child(3n+2) .scene-visual { background: #244c9b; }
+    .scene:nth-child(3n) .scene-visual { background: #143d49; }
+
+    .scene-num {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      color: var(--navy);
+      background: var(--lime);
+      font-weight: 950;
+    }
+
+    .screen-copy {
+      max-width: 440px;
+      margin: 0;
+      text-align: center;
+      font-size: clamp(25px, 3vw, 39px);
+      font-weight: 900;
+      line-height: 1.13;
+      letter-spacing: -.045em;
+    }
+
+    .screen-copy .accent { color: var(--lime); }
+
+    .screen-sub {
+      display: block;
+      margin-top: 12px;
+      color: rgba(255,255,255,.64);
+      font-size: 13px;
+      font-weight: 650;
+      letter-spacing: 0;
+      line-height: 1.5;
+    }
+
+    .mini-window {
+      width: min(100%, 430px);
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 18px 34px rgba(0,0,0,.2);
+    }
+
+    .window-bar {
+      height: 28px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      padding: 0 10px;
+      border-bottom: 1px solid rgba(255,255,255,.15);
+    }
+
+    .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--coral); }
+    .dot:nth-child(2) { background: #f0c95d; }
+    .dot:nth-child(3) { background: var(--lime); }
+
+    .window-body { padding: 17px; }
+
+    .code-line {
+      height: 8px;
+      margin: 8px 0;
+      border-radius: 20px;
+      background: rgba(255,255,255,.2);
+    }
+
+    .code-line:nth-child(2) { width: 74%; background: rgba(87,200,212,.7); }
+    .code-line:nth-child(3) { width: 88%; }
+    .code-line:nth-child(4) { width: 58%; background: rgba(183,215,93,.65); }
+
+    .gap-grid {
+      width: min(100%, 440px);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+
+    .gap-chip {
+      padding: 17px 10px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 12px;
+      background: rgba(255,255,255,.08);
+      text-align: center;
+      font-size: 15px;
+      font-weight: 850;
+    }
+
+    .flow {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      flex-wrap: wrap;
+    }
+
+    .flow span {
+      padding: 10px 12px;
+      border-radius: 10px;
+      color: var(--navy);
+      background: white;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .flow b { color: var(--cyan); }
+
+    .scene-info { padding: 22px; }
+
+    .scene-title-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .scene-title-row h3 { margin: 0; font-size: 18px; }
+    .scene-title-row time { color: var(--blue); font-size: 12px; font-weight: 900; }
+
+    .scene-info dl {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 7px 12px;
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .scene-info dt { color: var(--muted); font-weight: 800; }
+    .scene-info dd { margin: 0; }
+
+    .run-table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--surface);
+    }
+
+    table { width: 100%; border-collapse: collapse; min-width: 780px; }
+
+    th, td {
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+    }
+
+    th {
+      color: white;
+      background: var(--navy);
+      font-size: 12px;
+      letter-spacing: .04em;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .pill {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 999px;
+      color: #173c46;
+      background: #d8f1ef;
+      font-size: 11px;
+      font-weight: 850;
+      white-space: nowrap;
+    }
+
+    .activity {
+      display: grid;
+      grid-template-columns: .8fr 1.2fr;
+      overflow: hidden;
+      border-radius: 26px;
+      color: white;
+      background: var(--navy);
+      box-shadow: var(--shadow);
+    }
+
+    .activity-copy { padding: clamp(28px, 5vw, 52px); }
+
+    .activity-copy h3 {
+      margin-bottom: 12px;
+      font-size: clamp(27px, 4vw, 44px);
+      line-height: 1.1;
+      letter-spacing: -.045em;
+    }
+
+    .activity-copy p { margin-bottom: 0; color: rgba(255,255,255,.7); }
+
+    .activity-prompt {
+      display: grid;
+      align-content: center;
+      gap: 16px;
+      padding: clamp(28px, 5vw, 52px);
+      color: var(--ink);
+      background: var(--lime);
+    }
+
+    .blank {
+      display: block;
+      padding-bottom: 5px;
+      border-bottom: 2px solid rgba(23,35,63,.42);
+      font-weight: 850;
+    }
+
+    .production-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .production-grid .panel { padding: 22px; }
+    .production-grid ul { margin: 0; padding-left: 20px; color: var(--muted); font-size: 13px; }
+    .production-grid li + li { margin-top: 7px; }
+
+    .avoid { border-top: 5px solid var(--coral); }
+    .prepare { border-top: 5px solid var(--cyan); }
+    .done { border-top: 5px solid var(--lime); }
+
+    footer {
+      margin-top: 72px;
+      padding: 26px 0;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    @media (max-width: 840px) {
+      nav { display: none; }
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .meta-grid { grid-template-columns: 1fr 1fr; }
+      .section-head { grid-template-columns: 1fr; gap: 5px; }
+      .outcome, .storyboard, .activity { grid-template-columns: 1fr; }
+      .production-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 580px) {
+      main { width: min(100% - 20px, 1180px); padding-top: 18px; }
+      .hero { padding: 30px 22px; border-radius: 22px; }
+      .meta-grid { grid-template-columns: 1fr; }
+      .script-block { grid-template-columns: 1fr; padding: 21px; }
+      .timecode { position: static; width: max-content; }
+      .scene-visual { min-height: 210px; }
+      footer { flex-direction: column; }
+    }
+
+    @media print {
+      body { background: white; color: #111; }
+      .topbar { display: none; }
+      main { width: 100%; padding: 0; }
+      .hero { min-height: 0; box-shadow: none; break-after: page; }
+      section { margin-top: 38px; }
+      .script-block, .scene, .panel { break-inside: avoid; box-shadow: none; }
+      .storyboard { grid-template-columns: 1fr 1fr; }
+      footer { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand"><span class="brand-mark">0–1</span> AI 풀스택 출시 과정</div>
+      <nav aria-label="문서 내 이동">
+        <a href="#direction">수업 설계</a>
+        <a href="#script">전체 스크립트</a>
+        <a href="#storyboard">스토리보드</a>
+        <a href="#run">진행표</a>
+        <a href="#production">제작 체크</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <header class="hero">
+      <div>
+        <div class="eyebrow">Lecture script · storyboard · v0.1</div>
+        <h1>코드는 생겼는데,<br><span>왜 출시는 안 됐을까?</span></h1>
+        <p class="hero-lead">0-1. 이 강의가 해결하는 문제 — AI 코딩의 속도를 ‘서비스 출시’라는 결과로 연결하기 위한 5분 오프닝 수업.</p>
+      </div>
+      <aside class="hero-card" aria-label="수업 길이">
+        <span class="duration">05:00</span>
+        <p>말하기 기준 4분 35초<br>호흡·화면 전환 여유 25초</p>
+      </aside>
+    </header>
+
+    <div class="meta-grid" aria-label="수업 메타데이터">
+      <div class="meta-card"><small>Audience</small><strong>부트캠프 수료생<br>1–3년차 개발자</strong></div>
+      <div class="meta-card"><small>Format</small><strong>강사 A-roll +<br>모션 그래픽 B-roll</strong></div>
+      <div class="meta-card"><small>Learner action</small><strong>마지막 미완성<br>프로젝트 한 줄 기록</strong></div>
+      <div class="meta-card"><small>Next lesson</small><strong>0-2. SignalDesk<br>완성본 둘러보기</strong></div>
+    </div>
+
+    <section id="direction">
+      <div class="section-head">
+        <div class="section-index">01 · DIRECTION</div>
+        <div>
+          <h2>수업의 역할</h2>
+          <p>도구 사용법을 약속하는 수업이 아니다. 수강생이 자신의 미완성 원인을 알아보고, 이 강의가 다룰 문제의 경계를 정확히 이해하게 만든다.</p>
+        </div>
+      </div>
+
+      <div class="outcome">
+        <article class="panel">
+          <h3>수업이 끝나고 남아야 할 한 문장</h3>
+          <p class="big-quote">AI가 코드를 만드는 속도와 내가 서비스를 출시하는 능력은 같은 것이 아니다.</p>
+        </article>
+        <article class="panel">
+          <h3>학습 목표</h3>
+          <ul class="checklist">
+            <li>코드 생성과 서비스 출시의 차이를 설명한다.</li>
+            <li>미완성을 만드는 네 가지 간극을 구분한다.</li>
+            <li>자신의 마지막 프로젝트가 멈춘 지점을 한 줄로 적는다.</li>
+            <li>다음 수업에서 확인할 ‘완성 상태’를 궁금해한다.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="script">
+      <div class="section-head">
+        <div class="section-index">02 · FULL SCRIPT</div>
+        <div>
+          <h2>전체 강의 스크립트</h2>
+          <p>따옴표 안은 실제 강사 대사다. 대괄호 지시는 촬영·편집용이며 읽지 않는다. 평소 말하는 속도로 진행하고 핵심 문장 앞뒤에 짧은 침묵을 둔다.</p>
+        </div>
+      </div>
+
+      <div class="script-grid">
+        <article class="script-block">
+          <div class="timecode">00:00–00:25</div>
+          <div class="script-body">
+            <h3>훅 — 결과의 차이</h3>
+            <span class="intent">의도: 첫 10초 안에 수강생의 경험을 정확히 호명한다.</span>
+            <p class="narration">“AI에게 기능을 부탁했더니 몇 분 만에 코드가 나옵니다. 화면도 열리고, 버튼도 한 번은 동작합니다. 그런데 일주일 뒤 그 프로젝트는 어디에 있나요? 배포되지 않은 저장소, 깨진 테스트, 설명하기 어려운 코드로 남아 있지는 않나요?”</p>
+            <p class="direction"><b>진행:</b> 첫 문장은 카메라 정면. ‘그런데’에서 0.5초 멈춘 뒤 미완성 프로젝트 폴더 화면으로 컷.</p>
+          </div>
+        </article>
+
+        <article class="script-block">
+          <div class="timecode">00:25–01:00</div>
+          <div class="script-body">
+            <h3>공감 — 개인의 의지 문제가 아니다</h3>
+            <span class="intent">의도: 실패감 대신 해결 가능한 구조의 문제로 재정의한다.</span>
+            <p class="narration">“이건 여러분이 의지가 부족해서도, 프롬프트를 못 써서도 아닙니다. 코드 한 조각을 만드는 일과 서비스를 끝까지 출시하는 일 사이에는 생각보다 많은 결정이 있기 때문입니다. 무엇을 만들지 줄여야 하고, 데이터와 API의 약속을 정해야 하고, 결과가 맞는지 검증해야 하고, 실패했을 때 다시 살릴 방법도 준비해야 합니다.”</p>
+            <p class="direction"><b>진행:</b> ‘의지가 부족해서도’와 ‘프롬프트를 못 써서도’에 작은 X 그래픽. 마지막 문장은 네 개의 결정 카드가 하나씩 등장.</p>
+          </div>
+        </article>
+
+        <article class="script-block">
+          <div class="timecode">01:00–01:38</div>
+          <div class="script-body">
+            <h3>문제 정의 — 생성 완료는 출시 완료가 아니다</h3>
+            <span class="intent">의도: 강의 전체를 관통하는 판단 기준을 제시한다.</span>
+            <p class="narration">“AI는 빈 화면을 코드로 채우는 데 아주 강합니다. 하지만 ‘그럴듯한 코드가 생겼다’를 ‘출시할 수 있다’로 판정해 주지는 않습니다. 브라우저에서 한 번 보였다는 것과, 다른 환경에서도 반복해서 작동한다는 것은 다릅니다. 기능이 있다는 것과, 실제 사용자가 실패 없이 목적을 달성한다는 것도 다릅니다.”</p>
+            <p class="direction"><b>진행:</b> 화면을 세로로 나눠 왼쪽에는 ‘코드 생성 완료’, 오른쪽에는 ‘서비스 출시 완료’. 우측에만 테스트·URL·로그·런북 배지 표시.</p>
+          </div>
+        </article>
+
+        <article class="script-block">
+          <div class="timecode">01:38–02:33</div>
+          <div class="script-body">
+            <h3>진단 — 프로젝트를 멈추게 하는 네 가지 간극</h3>
+            <span class="intent">의도: 수강생이 자신의 병목을 분류할 언어를 얻는다.</span>
+            <p class="narration">“대부분의 미완성 프로젝트는 네 군데에서 멈춥니다. 첫째, <b>범위의 간극</b>입니다. 아이디어는 큰데 이번 주에 끝낼 핵심 행동이 없습니다. 둘째, <b>컨텍스트의 간극</b>입니다. AI가 프로젝트 규칙과 이전 결정을 모르니 매번 다른 방향으로 코드를 바꿉니다. 셋째, <b>검증의 간극</b>입니다. 실행 화면만 보고 넘어가서 데이터 오류와 회귀를 늦게 발견합니다. 넷째, <b>운영의 간극</b>입니다. 로컬에서는 되지만 배포, 로그, 복구 방법이 없습니다.”</p>
+            <p class="direction"><b>진행:</b> 범위 → 컨텍스트 → 검증 → 운영 순으로 4분할 카드 확대. 각 항목의 굵은 단어는 화면 자막과 정확히 일치시킨다.</p>
+          </div>
+        </article>
+
+        <article class="script-block">
+          <div class="timecode">02:33–03:24</div>
+          <div class="script-body">
+            <h3>해결 방식 — AI를 팀처럼 쓰는 반복 루프</h3>
+            <span class="intent">의도: 이 강의가 프롬프트 모음이 아니라 작업 시스템임을 밝힌다.</span>
+            <p class="narration">“그래서 이 강의에서는 좋은 프롬프트 몇 개를 외우지 않습니다. 사람이 목표와 제약, 완료 조건을 정합니다. AI는 그 범위 안에서 조사하고 작은 변경을 제안합니다. 우리는 diff와 근거를 확인하고, 자동 테스트와 실제 실행 결과로 승인하거나 거절합니다. 그리고 결정과 실패를 저장해 다음 작업의 컨텍스트로 넘깁니다. 이 짧은 루프를 기획부터 배포까지 계속 반복할 겁니다.”</p>
+            <p class="direction"><b>진행:</b> 원형 루프 애니메이션. ‘사람의 결정’은 라임색, ‘AI의 제안’은 청록색, ‘자동 검증’은 흰색으로 일관되게 사용.</p>
+          </div>
+        </article>
+
+        <article class="script-block">
+          <div class="timecode">03:24–04:05</div>
+          <div class="script-body">
+            <h3>완주 약속 — 강의에서 함께 만들 것</h3>
+            <span class="intent">의도: 기술 목록이 아닌 가시적인 완성 증거를 약속한다.</span>
+            <p class="narration">“우리는 이 방식으로 ‘SignalDesk’라는 작은 풀스택 서비스를 만듭니다. 이벤트를 수집하고 정규화해 저장한 뒤, AI가 구조화된 브리핑을 만들고, 사용자는 목록과 상세 화면에서 결과를 확인합니다. 하지만 진짜 결과물은 화면만이 아닙니다. 자동 테스트, 공개 URL, AI 실행 이력, 그리고 장애가 났을 때 따라 할 운영 런북까지 남깁니다.”</p>
+            <p class="direction"><b>진행:</b> SignalDesk 흐름을 왼쪽에서 오른쪽으로 연결. 마지막 문장에서는 테스트·URL·실행 이력·런북이 제품 화면 주변에 증거 카드로 붙는다.</p>
+          </div>
+        </article>
+
+        <article class="script-block">
+          <div class="timecode">04:05–04:42</div>
+          <div class="script-body">
+            <h3>수강생 행동 — 마지막 미완성 지점 기록</h3>
+            <span class="intent">의도: 시청을 자기 진단으로 전환한다.</span>
+            <p class="narration">“다음 수업으로 가기 전에 30초만 써 보겠습니다. 최근에 끝내지 못한 프로젝트 하나를 떠올려 주세요. 그리고 이렇게 적어 보세요. ‘내 프로젝트는 어디에서 멈췄고, 그때 무엇이 없었는가?’ 기능을 계속 추가하다 멈췄다면 범위, AI가 코드를 계속 뒤집었다면 컨텍스트, 고칠수록 다른 곳이 깨졌다면 검증, 로컬 다음으로 못 갔다면 운영에 표시하면 됩니다.”</p>
+            <p class="direction"><b>진행:</b> 워크북 문장을 전체 화면에 표시하고 3초 침묵. 네 항목 중 하나에 체크하는 예시를 짧게 보여 준다.</p>
+          </div>
+        </article>
+
+        <article class="script-block">
+          <div class="timecode">04:42–05:00</div>
+          <div class="script-body">
+            <h3>브리지 — 완성 상태를 먼저 보여주기</h3>
+            <span class="intent">의도: 다음 강의의 완성본 데모로 기대감을 연결한다.</span>
+            <p class="narration">“이제 우리가 목표로 삼을 ‘완성’이 어떤 모습인지 먼저 확인하겠습니다. 다음 수업에서는 SignalDesk의 화면보다, 그 뒤에 함께 남은 출시 증거를 중심으로 완성본을 둘러보겠습니다.”</p>
+            <p class="direction"><b>진행:</b> 강사 A-roll에서 SignalDesk 완성 화면으로 매치 컷. 0-2 수업 제목 카드가 올라오며 종료.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="storyboard">
+      <div class="section-head">
+        <div class="section-index">03 · STORYBOARD</div>
+        <div>
+          <h2>장면별 스토리보드</h2>
+          <p>한 장면에는 한 메시지만 둔다. 화면 속 코드가 아니라 수강생의 인식 변화가 이야기의 중심이다.</p>
+        </div>
+      </div>
+
+      <div class="storyboard">
+        <article class="scene">
+          <div class="scene-visual">
+            <span class="scene-num">1</span>
+            <div class="mini-window" aria-label="코드 창 모형">
+              <div class="window-bar"><i class="dot"></i><i class="dot"></i><i class="dot"></i></div>
+              <div class="window-body"><div class="code-line"></div><div class="code-line"></div><div class="code-line"></div><div class="code-line"></div></div>
+            </div>
+          </div>
+          <div class="scene-info">
+            <div class="scene-title-row"><h3>빠르게 생긴 코드</h3><time>00:00–00:25</time></div>
+            <dl><dt>화면</dt><dd>A-roll 5초 → AI 채팅·코드·로컬 화면 빠른 몽타주</dd><dt>자막</dt><dd>“코드는 생겼다. 출시는?”</dd><dt>전환</dt><dd>동작하던 화면이 미완성 폴더 아이콘으로 축소</dd><dt>에셋</dt><dd>AI 응답, 코드 편집기, 로컬 브라우저 캡처</dd></dl>
+          </div>
+        </article>
+
+        <article class="scene">
+          <div class="scene-visual">
+            <span class="scene-num">2</span>
+            <p class="screen-copy">의지 부족 <span class="accent">×</span><br>프롬프트 재능 <span class="accent">×</span><span class="screen-sub">출시에는 여러 결정이 필요하다</span></p>
+          </div>
+          <div class="scene-info">
+            <div class="scene-title-row"><h3>실패감 걷어내기</h3><time>00:25–01:00</time></div>
+            <dl><dt>화면</dt><dd>강사 A-roll 위 키워드 2개가 차례로 지워짐</dd><dt>자막</dt><dd>“개인의 의지 문제가 아니다”</dd><dt>전환</dt><dd>지워진 공간에 네 개의 결정 카드 등장</dd><dt>톤</dt><dd>책망하지 않고 경험을 정확히 설명하는 말투</dd></dl>
+          </div>
+        </article>
+
+        <article class="scene">
+          <div class="scene-visual">
+            <span class="scene-num">3</span>
+            <p class="screen-copy">코드 생성 완료<br><span class="accent">≠</span><br>서비스 출시 완료</p>
+          </div>
+          <div class="scene-info">
+            <div class="scene-title-row"><h3>잘못된 등식 깨기</h3><time>01:00–01:38</time></div>
+            <dl><dt>화면</dt><dd>양분 화면. 왼쪽은 코드, 오른쪽은 실제 사용자 흐름</dd><dt>자막</dt><dd>“한 번 보임 ≠ 반복 작동”</dd><dt>효과</dt><dd>우측에 테스트·URL·로그·런북 배지 순차 등장</dd><dt>주의</dt><dd>특정 AI 도구 로고는 노출하지 않음</dd></dl>
+          </div>
+        </article>
+
+        <article class="scene">
+          <div class="scene-visual">
+            <span class="scene-num">4</span>
+            <div class="gap-grid"><div class="gap-chip">01 범위</div><div class="gap-chip">02 컨텍스트</div><div class="gap-chip">03 검증</div><div class="gap-chip">04 운영</div></div>
+          </div>
+          <div class="scene-info">
+            <div class="scene-title-row"><h3>네 가지 간극</h3><time>01:38–02:33</time></div>
+            <dl><dt>화면</dt><dd>4분할 카드를 설명 순서에 맞춰 한 장씩 확대</dd><dt>자막</dt><dd>키워드와 한 줄 증상만 유지</dd><dt>리듬</dt><dd>항목당 약 12초, 사이 0.3초 호흡</dd><dt>목적</dt><dd>수강생이 자기 문제를 분류할 어휘 제공</dd></dl>
+          </div>
+        </article>
+
+        <article class="scene">
+          <div class="scene-visual">
+            <span class="scene-num">5</span>
+            <div class="flow"><span>목표·제약</span><b>→</b><span>AI의 작은 변경</span><b>→</b><span>diff</span><b>→</b><span>테스트</span><b>→</b><span>기록</span></div>
+          </div>
+          <div class="scene-info">
+            <div class="scene-title-row"><h3>반복 가능한 작업 루프</h3><time>02:33–03:24</time></div>
+            <dl><dt>화면</dt><dd>노드가 선형으로 등장한 뒤 하나의 루프로 접힘</dd><dt>자막</dt><dd>“AI는 제안하고, 사람은 승인한다”</dd><dt>강조</dt><dd>diff·테스트에서 0.5초씩 멈춤</dd><dt>전환</dt><dd>루프 중앙에 SignalDesk 로고타입 등장</dd></dl>
+          </div>
+        </article>
+
+        <article class="scene">
+          <div class="scene-visual">
+            <span class="scene-num">6</span>
+            <div>
+              <p class="screen-copy">SignalDesk<span class="screen-sub">수집 → 정규화 → 저장 → AI 브리핑 → 검증 → 화면</span></p>
+              <div class="flow" style="margin-top:18px"><span>TEST</span><span>URL</span><span>RUN LOG</span><span>RUNBOOK</span></div>
+            </div>
+          </div>
+          <div class="scene-info">
+            <div class="scene-title-row"><h3>완성 증거의 약속</h3><time>03:24–04:05</time></div>
+            <dl><dt>화면</dt><dd>제품 흐름 아래에 네 가지 출시 증거 배치</dd><dt>자막</dt><dd>“화면만이 결과물은 아니다”</dd><dt>에셋</dt><dd>SignalDesk 완성본 캡처 3장, 테스트 결과 캡처</dd><dt>주의</dt><dd>기능을 길게 설명하지 않고 결과만 예고</dd></dl>
+          </div>
+        </article>
+
+        <article class="scene">
+          <div class="scene-visual">
+            <span class="scene-num">7</span>
+            <p class="screen-copy">내 프로젝트는<br><span class="accent">______</span>에서 멈췄다.<span class="screen-sub">범위 · 컨텍스트 · 검증 · 운영</span></p>
+          </div>
+          <div class="scene-info">
+            <div class="scene-title-row"><h3>30초 자기 진단</h3><time>04:05–04:42</time></div>
+            <dl><dt>화면</dt><dd>워크북 문장을 전체 화면에 고정</dd><dt>정지</dt><dd>대사 후 최소 3초 무음</dd><dt>행동</dt><dd>노트 또는 워크북에 프로젝트·정지 지점 기록</dd><dt>완료</dt><dd>네 간극 중 하나에 임시 표시</dd></dl>
+          </div>
+        </article>
+
+        <article class="scene">
+          <div class="scene-visual">
+            <span class="scene-num">8</span>
+            <p class="screen-copy">다음 수업<br><span class="accent">완성은 어떤 모습인가?</span><span class="screen-sub">0-2. SignalDesk 완성본 둘러보기</span></p>
+          </div>
+          <div class="scene-info">
+            <div class="scene-title-row"><h3>다음 수업으로 브리지</h3><time>04:42–05:00</time></div>
+            <dl><dt>화면</dt><dd>A-roll → SignalDesk 완성 화면 매치 컷</dd><dt>자막</dt><dd>“기능보다 출시 증거를 먼저 본다”</dd><dt>음향</dt><dd>짧은 상승 스팅어, 0-2 타이틀에서 정리</dd><dt>종료</dt><dd>별도 CTA 없이 다음 강의 자동재생 유도</dd></dl>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="run">
+      <div class="section-head">
+        <div class="section-index">04 · RUN OF SHOW</div>
+        <div>
+          <h2>강의 진행표</h2>
+          <p>녹화 현장에서 대본 전체를 다시 읽지 않아도 되도록 진행 신호와 산출물을 압축한 표다.</p>
+        </div>
+      </div>
+      <div class="run-table-wrap">
+        <table>
+          <thead><tr><th>시간</th><th>교육 기능</th><th>강사 진행</th><th>화면/편집</th><th>수강생 상태</th></tr></thead>
+          <tbody>
+            <tr><td>00:00–00:25</td><td><span class="pill">Hook</span></td><td>빠른 생성과 미완성의 대비 질문</td><td>A-roll → 3컷 몽타주</td><td>“내 얘기다”라고 인식</td></tr>
+            <tr><td>00:25–01:00</td><td><span class="pill">Reframe</span></td><td>의지·프롬프트 탓이 아님을 설명</td><td>X 그래픽, 결정 카드</td><td>실패감이 구조적 호기심으로 이동</td></tr>
+            <tr><td>01:00–01:38</td><td><span class="pill">Define</span></td><td>생성과 출시의 완료 조건 구분</td><td>좌우 비교 화면</td><td>강의의 문제 범위 이해</td></tr>
+            <tr><td>01:38–02:33</td><td><span class="pill">Diagnose</span></td><td>네 가지 간극과 증상 설명</td><td>4분할 카드 확대</td><td>자신의 병목을 임시 분류</td></tr>
+            <tr><td>02:33–03:24</td><td><span class="pill">Method</span></td><td>사람·AI·자동 검증 루프 설명</td><td>선형 흐름 → 반복 루프</td><td>강의가 도구 사용법이 아님을 이해</td></tr>
+            <tr><td>03:24–04:05</td><td><span class="pill">Promise</span></td><td>SignalDesk와 출시 증거 제시</td><td>제품 흐름 + 증거 배지</td><td>완강 후 결과를 구체적으로 상상</td></tr>
+            <tr><td>04:05–04:42</td><td><span class="pill">Action</span></td><td>30초 자기 진단 안내</td><td>문장 고정, 3초 무음</td><td>미완성 프로젝트 한 줄 기록</td></tr>
+            <tr><td>04:42–05:00</td><td><span class="pill">Bridge</span></td><td>완성 상태 확인을 예고</td><td>SignalDesk 매치 컷</td><td>0-2 수업으로 이동</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-label="수강생 활동">
+      <div class="activity">
+        <div class="activity-copy">
+          <div class="eyebrow">Learner action · 30 sec</div>
+          <h3>마지막 미완성을<br>한 줄로 붙잡기</h3>
+          <p>정답을 찾는 활동이 아니다. 이후 수업에서 해결 여부를 비교할 기준선을 남기는 활동이다.</p>
+        </div>
+        <div class="activity-prompt">
+          <span class="blank">내가 끝내지 못한 프로젝트는 ____________________ 이다.</span>
+          <span class="blank">프로젝트는 ____________________ 단계에서 멈췄다.</span>
+          <span class="blank">그때 없었던 것은 □ 범위 □ 컨텍스트 □ 검증 □ 운영 이었다.</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="production">
+      <div class="section-head">
+        <div class="section-index">05 · PRODUCTION</div>
+        <div>
+          <h2>촬영·편집 체크리스트</h2>
+          <p>오프닝의 목표는 모든 내용을 설명하는 것이 아니라 문제를 선명하게 만들고 다음 수업으로 이동시키는 것이다.</p>
+        </div>
+      </div>
+
+      <div class="production-grid">
+        <article class="panel prepare">
+          <h3>촬영 전 준비</h3>
+          <ul>
+            <li>미완성 프로젝트 폴더용 가상 화면 1개</li>
+            <li>AI 응답·코드·로컬 화면 각 1개</li>
+            <li>SignalDesk 완성 화면 캡처 3개</li>
+            <li>테스트·URL·실행 이력·런북 배지</li>
+            <li>0-2 타이틀 카드</li>
+          </ul>
+        </article>
+        <article class="panel avoid">
+          <h3>피해야 할 것</h3>
+          <ul>
+            <li>AI가 개발자를 대체한다는 과장</li>
+            <li>특정 도구의 기능 소개로 새는 장면</li>
+            <li>SignalDesk 기능을 미리 길게 시연</li>
+            <li>수강생의 미완성을 능력 부족으로 표현</li>
+            <li>화면에 긴 문단을 그대로 노출</li>
+          </ul>
+        </article>
+        <article class="panel done">
+          <h3>편집 완료 기준</h3>
+          <ul>
+            <li>5분 ± 10초 이내</li>
+            <li>네 가지 간극 용어가 음성·자막과 일치</li>
+            <li>자기 진단용 무음 3초 확보</li>
+            <li>출시 증거 네 종류가 식별 가능</li>
+            <li>마지막 프레임이 0-2와 직접 연결</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <span>AI 에이전트로 프로덕션 풀스택 출시하기 · Section 0</span>
+      <span>문서 버전 0.1 · 2026-09-07</span>
+    </footer>
+  </main>
+</body>
+</html>
