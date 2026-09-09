@@ -17,7 +17,8 @@ for (const slide of data.slides) {
   assert.equal(start, previous, `Non-contiguous timing: ${slide.title}`);
   assert(end > start);
   previous = end;
-  for (const key of ['title', 'content', 'note', 'direction']) assert(slide[key]?.length > 10, `Missing ${key}`);
+  for (const key of ['title', 'content']) assert(slide[key]?.length > 10, `Missing ${key}`);
+  for (const key of ['note', 'direction']) assert(!Object.hasOwn(slide, key), `Private field ${key}`);
   const stack = [];
   for (const tag of slide.content.matchAll(/<\/?([a-z][a-z0-9-]*)\b[^>]*>/gi)) {
     const name = tag[1].toLowerCase();
@@ -33,35 +34,30 @@ assert.equal(seconds(data.duration), previous);
 // Instructor corrections must remain synchronized in slides and narration.
 const biography = data.slides[1];
 assert(biography.content.includes('공군 장교'));
-assert(biography.note.includes('공군 장교'));
-assert(biography.note.includes('요식업 창업'));
 assert.equal((biography.content.match(/<article>/g) || []).length, 5);
 assert(biography.content.indexOf('공군 장교') < biography.content.indexOf('요식업 창업'));
 assert(biography.content.indexOf('요식업 창업') < biography.content.indexOf('부트캠프'));
 assert(data.slides[2].content.includes('티머니 프로젝트'));
-assert(data.slides[2].note.includes('티머니 프로젝트'));
 assert(!JSON.stringify(data).includes('육군'));
 assert(!JSON.stringify(data).includes('이력서 기준'));
 assert(!data.slides[2].content.includes('Java 기반 SaaS 연동'));
 assert(read(path.join(materials, 'orientation-v0.1.css')).includes('.journey{display:grid;grid-template-columns:repeat(5,minmax(0,1fr))'));
 
-const curriculumName = fs.readdirSync(materials).find(name => name.includes('커리큘럼_v0.2.html'));
+const curriculumName = fs.readdirSync(materials).find(name => name.includes('커리큘럼_v0.4.html'));
 const curriculumHtml = read(path.join(materials, curriculumName));
 const sectionLiteral = curriculumHtml.match(/const sections = ([\s\S]+?);\s*function escapeHtml/)[1];
 const sections = vm.runInNewContext(sectionLiteral);
 const main = sections.filter(section => section.kind !== 'appendix');
 const lessons = sections.flatMap(section => section.lessons);
 assert.equal(main.length, 9);
-assert.equal(main.flatMap(section => section.lessons).length, 44);
-assert.equal(lessons.length, 47);
+assert.equal(main.flatMap(section => section.lessons).length, 46);
+assert.equal(lessons.length, 49);
 for (const section of sections) {
   assert.equal(section.lessons.reduce((n, lesson) => n + parseInt(lesson[1]), 0), parseInt(section.duration));
 }
-assert.equal(main.reduce((n, section) => n + parseInt(section.duration), 0), 436);
-assert.equal(sections.reduce((n, section) => n + parseInt(section.duration), 0), 466);
-assert.equal(lessons[0][0], '0-0. 오리엔테이션 — 강사 소개와 함께 만들 결과');
-assert(curriculumHtml.includes('<strong>47</strong>'));
-assert(curriculumHtml.includes('<strong>7:46</strong>'));
+assert.equal(main.reduce((n, section) => n + parseInt(section.duration), 0), 458);
+assert.equal(sections.reduce((n, section) => n + parseInt(section.duration), 0), 488);
+assert(lessons[0][0].startsWith('0-0.'));
 const md = read(path.join(materials, curriculumName.replace('.html', '.md')));
 const mdLessons = [...md.matchAll(/^\| ([0-8A]-\d+)\.[^|]*\| (\d+)분/gm)];
 assert.equal(mdLessons.length, lessons.length);
@@ -69,8 +65,8 @@ lessons.forEach((lesson, i) => {
   assert.equal(lesson[0].split('.')[0], mdLessons[i][1]);
   assert.equal(parseInt(lesson[1]), Number(mdLessons[i][2]));
 });
-assert(md.includes('44개 수업'));
-assert(md.includes('7시간 16분'));
+assert(/46(?:개 수업|강)/.test(md));
+assert(md.includes('7시간 38분'));
 
 const sourceFiles = [path.join(root, 'dist', 'index.html'), ...fs.readdirSync(materials).filter(name => name.endsWith('.html')).map(name => path.join(materials, name))];
 let localLinks = 0;
@@ -105,21 +101,22 @@ assert(landing.includes('<span class="catalog-anchor" id="scripts"'), 'Old scrip
 const rows = [...catalog.matchAll(/<article class="lesson-row" data-lesson="([^"]+)"[^>]*>([\s\S]*?)<\/article>/g)];
 assert.deepEqual(rows.map(row => row[1]), ['0-0', '0-1', '0-2', '0-3', '0-4', '0-5', '0-6']);
 for (const [_, id, html] of rows) {
-  assert(lessons.some(lesson => lesson[0].startsWith(id + '.')));
+  // Authored slides retain v0.2 IDs; the v0.4 curriculum is checked separately.
+  assert(landing.includes('v0.2 편성으로 제작된 자료'));
   assert(html.includes('id="lesson-' + id + '-title"'));
   assert(html.includes('class="lesson-actions"'));
   assert(html.indexOf('class="lesson-heading"') < html.indexOf('class="lesson-actions"'));
   assert.equal((html.match(/data-material="slides"/g) || []).length, 1);
-  assert.equal((html.match(/data-material="scripts"/g) || []).length, 1);
+  assert.equal((html.match(/data-material="scripts"/g) || []).length, 0);
   assert(html.includes('_강의슬라이드_v0.1.html'));
-  assert(html.includes('_스크립트_스토리보드_v0.1.html'));
+  assert(!html.includes('_스크립트_스토리보드_v0.1.html'));
   assert(!/<(?:summary|details)\b/.test(html));
 }
 for (const summary of catalog.matchAll(/<summary>([\s\S]*?)<\/summary>/g)) {
   assert(!/<(?:a|button|input)\b/.test(summary[1]), 'No interactive controls inside chapter toggle');
 }
 assert.equal((catalog.match(/_강의슬라이드_v0\.1\.html/g) || []).length, 7);
-assert.equal((catalog.match(/_스크립트_스토리보드_v0\.1\.html/g) || []).length, 7);
+assert.equal((catalog.match(/_스크립트_스토리보드_v0\.1\.html/g) || []).length, 0);
 assert(!landing.includes('대본'));
 for (const file of sourceFiles.filter(file => file.includes('0-0_') || file.includes('0-1_') || file.endsWith('커리큘럼_v0.2.html'))) {
   assert(!read(file).includes('대본'), `Outdated material label: ${file}`);
@@ -155,15 +152,13 @@ assert.equal(get('deck').children[0].inert, true);
 assert.equal(get('deck').children[2].inert, false);
 get('next').events.click(); assert.equal(get('counter').textContent, '04 / 12');
 get('prev').events.click(); assert.equal(get('counter').textContent, '03 / 12');
-get('notes').events.click(); assert.equal(get('notesPanel').hidden, false); assert.equal(get('notes').attrs['aria-expanded'], 'true');
-assert.equal(get('notesText').textContent, data.slides[2].note);
 const key = name => docEvents.keydown({key:name, target:{closest:() => null}, preventDefault(){}});
-key('n'); assert.equal(get('notesPanel').hidden, true);
+key('n'); assert.equal(get('counter').textContent, '03 / 12');
 key('Home'); assert.equal(get('counter').textContent, '01 / 12'); assert.equal(get('prev').disabled, true);
 key('ArrowLeft'); assert.equal(get('counter').textContent, '01 / 12');
 key('End'); assert.equal(get('counter').textContent, '12 / 12'); assert.equal(get('next').disabled, true);
 key('ArrowRight'); assert.equal(get('counter').textContent, '12 / 12');
 sandbox.location.hash = '#not-a-number'; winEvents.hashchange(); assert.equal(get('counter').textContent, '01 / 12');
 sandbox.location.hash = '#999'; winEvents.hashchange(); assert.equal(get('counter').textContent, '12 / 12');
-key('n'); get('closeNotes').events.click(); assert.equal(get('notesPanel').hidden, true); assert.equal(get('notes').focused, true);
-console.log(`PASS: 12 slides / 600 seconds; 44 core lessons / 436 minutes; 47 total / 466 minutes; ${localLinks} local links; JS syntax; player navigation/notes/hash boundaries.`);
+assert(!get('notes').events.click);
+console.log(`PASS: 12 slides / 600 seconds; v0.4 = 46 core lessons / 458 minutes; 49 total / 488 minutes; ${localLinks} local links; JS syntax; public player navigation/hash boundaries.`);

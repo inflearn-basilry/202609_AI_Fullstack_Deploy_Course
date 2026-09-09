@@ -28,6 +28,12 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Validate public materials before deployment
+        run: |
+          node tests/validate-orientation.cjs
+          node tests/validate-section00.cjs
+          node tests/validate-public-boundary.cjs
+
       - name: Upload static site
         uses: actions/upload-pages-artifact@v4
         with:

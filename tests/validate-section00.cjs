@@ -19,7 +19,8 @@ for (let n = 2; n <= 6; n++) {
     const range = slide.time.split('–').map(seconds);
     assert.equal(range[0], end, data.id + ' timing gap');
     assert(range[1] > range[0]); end = range[1];
-    for (const key of ['label', 'title', 'content', 'note', 'direction']) assert(slide[key]?.length > 5, key);
+    for (const key of ['label', 'title', 'content']) assert(slide[key]?.length > 5, key);
+    for (const key of ['note', 'direction']) assert(!Object.hasOwn(slide, key), key);
     assert(['navy','paper'].includes(slide.theme));
     const tags = [];
     for (const tag of slide.content.matchAll(/<\/?([a-z][a-z0-9-]*)\b[^>]*>/gi)) {
@@ -34,7 +35,8 @@ for (let n = 2; n <= 6; n++) {
   }
   assert.equal(end, seconds(data.duration));
   assert.equal(end, [0,0,420,300,420,720,600][n]);
-  for (const url of [data.deckUrl, data.scriptUrl]) {
+  assert(!Object.hasOwn(data, 'scriptUrl'));
+  for (const url of [data.deckUrl]) {
     const html = read(path.join(materials, url));
     assert(html.includes('data-lesson-page="' + data.id + '"'));
     assert(html.includes('lesson-0-' + n + '-v0.1.js'));
@@ -58,12 +60,12 @@ for (const file of walk(dist)) {
   for (const match of content.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g)) new vm.Script(match[1]);
 }
 assert(read(path.join(dist,'robots.txt')).includes('User-agent: *\nDisallow: /'));
-for (const version of ['0.1','0.2']) {
+for (const version of ['0.1','0.4']) {
   const name = fs.readdirSync(materials).find(file => file.endsWith('커리큘럼_v' + version + '.html'));
   const html = read(path.join(materials,name));
   assert(html.includes('.mission strong { color: var(--navy);'));
   assert(html.includes('.output b { color: var(--navy);'));
-  assert(html.includes('body > footer strong'));
+  assert(html.includes('body > footer strong') || html.includes('.site-footer strong'));
   assert(!/^\s*footer\s+(?:strong|small)/m.test(html));
 }
 
