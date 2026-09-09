@@ -132,6 +132,14 @@ check('one shared theme on every public HTML page', () => {
   assert(/color-scheme\s*:\s*light\b/i.test(theme), 'Shared theme must opt into light native controls');
   assert(/--course-font-sans\s*:[^;]*Pretendard/i.test(theme), 'Shared sans stack must name Pretendard');
   assert(/--course-font-code\s*:/i.test(theme), 'Shared code font token missing');
+  assert(/--course-font-code\s*:\s*['"]D2Coding['"]\s*,\s*monospace\s*;/i.test(theme), 'Code font must use D2Coding');
+  const d2Faces = [...theme.matchAll(/@font-face\s*\{([^}]+)\}/gi)]
+    .map(match => match[1]).filter(face => /font-family\s*:\s*['"]D2Coding['"]/i.test(face));
+  for (const weight of [400, 700]) {
+    assert(d2Faces.some(face => new RegExp('font-weight\\s*:\\s*' + weight + '\\s*;').test(face)), 'Missing D2Coding weight ' + weight);
+  }
+  for (const file of [...htmlFiles, ...cssFiles]) assert(!/Consolas/i.test(read(file)), rel(file) + ': obsolete Consolas reference');
+  assert(/NAVER Corporation[\s\S]*SIL OPEN FONT LICENSE/.test(read(path.join(dist, 'assets', 'fonts', 'D2Coding-OFL.txt'))), 'D2Coding license missing');
 });
 
 check('approved palette and accessible token contrasts', () => {

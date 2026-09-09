@@ -6,6 +6,20 @@
   font-display: swap;
   src: url('./fonts/PretendardVariable.woff2') format('woff2');
 }
+@font-face {
+  font-family: 'D2Coding';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('./fonts/D2Coding-Regular.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'D2Coding';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url('./fonts/D2Coding-Bold.woff2') format('woff2');
+}
 :root {
   color-scheme: light;
   --course-canvas: #ebe8e0;
@@ -27,7 +41,7 @@
   --course-danger: #a43136;
   --course-danger-soft: #f1dfdc;
   --course-font-sans: 'Pretendard Variable', Pretendard, 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
-  --course-font-code: Consolas, 'SFMono-Regular', monospace;
+  --course-font-code: 'D2Coding', monospace;
   --course-weight-title: 750;
   --course-weight-subtitle: 650;
   --course-weight-body: 450;

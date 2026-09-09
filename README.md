@@ -27,6 +27,8 @@
 
 학생용 자료실·커리큘럼·디자인 가이드·전체 75장에 Linen Blue v1을 적용했습니다. 공통 색상은 dist/assets/course-theme.css, Pretendard Variable은 로컬 WOFF2와 OFL 라이선스로 제공합니다. 작은 화면에서는 슬라이드를 세로로 읽고, 데스크톱과 전체화면에서는 16:9 구성을 유지합니다.
 
+코드·번호·영문 라벨은 D2Coding을 사용합니다. 일반/굵은 WOFF2 원본은 [네이버 공식 저장소](https://github.com/naver/d2-coding-font/tree/9d6f0559691ebe670a23fbf7b72a8dc42362f1fb/site/fonts)에서 가져왔으며 글꼴을 수정하지 않았습니다. dist/assets/fonts/D2Coding-OFL.txt에 라이선스를 함께 제공합니다. 제목·본문 Pretendard와 기존 텍스트는 유지합니다.
+
 제작된 0-0~0-6은 v0.2 편성 기준의 7개 강의·75장·목표 편집 분량 56분입니다. v0.4 커리큘럼과 수업 구성·시간이 다르며 재편집은 별도 작업입니다. 0-2는 목표 화면·합성 예시이고 0-6의 starter·doctor는 구현·배포가 필요한 실습 계약입니다.
 
 방향키 이동과 F 전체화면, 제목 우측의 슬라이드 열기·수강 완료를 유지합니다. 스크립트 버튼과 N 발표자 노트 기능은 공개 화면에서 제거했습니다.
