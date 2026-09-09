@@ -18,7 +18,12 @@
   progress.setAttribute('aria-hidden', 'true');
   deck.append(progress);
   let current = 0;
-  function fit() { document.documentElement.style.setProperty('--scale', Math.min(innerWidth / 1920, Math.max(100, innerHeight - 66) / 1080)); }
+  function fit() {
+    const presenting = !!document.fullscreenElement;
+    document.documentElement.classList.toggle('presentation-mode', presenting);
+    const reading = innerWidth <= 760 && !presenting;
+    document.documentElement.style.setProperty('--scale', reading ? 1 : Math.min(innerWidth / 1920, Math.max(100, innerHeight - 80) / 1080));
+  }
   function fromHash() { const n = Number(location.hash.slice(1)); return Number.isInteger(n) && n > 0 ? n - 1 : 0; }
   function show(index, updateHash = true) {
     current = Math.max(0, Math.min(slides.length - 1, index));
@@ -34,6 +39,7 @@
     progress.style.setProperty('--progress', `${(current + 1) / slides.length * 100}%`);
     document.title = `${data.id || '0-0'} · ${pad(current + 1)} · ${item.title}`;
     if (updateHash) history.replaceState(null, '', `#${current + 1}`);
+    if (innerWidth <= 760 && !document.fullscreenElement && updateHash) window.scrollTo(0, 0);
   }
   async function fullscreen() {
     try {
@@ -63,6 +69,7 @@
     start = null;
   }, {passive:true});
   window.addEventListener('resize', fit);
+  document.addEventListener('fullscreenchange', fit);
   window.addEventListener('hashchange', () => show(fromHash(), false));
   fit(); show(fromHash(), false);
 })();

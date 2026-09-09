@@ -1,12 +1,13 @@
 <!doctype html>
 <html lang="ko">
 <head>
+  <link rel="stylesheet" href="../assets/course-theme.css">
   <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
   <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="AI 에이전트로 프로덕션 풀스택 출시하기 강의의 Canva·영상 슬라이드 디자인 시스템">
-  <title>AI 풀스택 강의 디자인 시스템 v0.1</title>
+  <title>Linen Blue v1 · AI 풀스택 강의 디자인 시스템</title>
   <style>
     :root {
       --navy: #10233f;
@@ -580,11 +581,13 @@
       .card { box-shadow: none; }
     }
   </style>
+<link rel="stylesheet" href="lecture-reference.css">
+<meta name="theme-color" content="#ebe8e0">
 </head>
-<body>
+<body class="reference-page reference-system">
   <header class="topbar">
     <div class="topbar-inner">
-      <div class="brand"><span class="brand-mark">AI</span>COURSE VISUAL SYSTEM / 0.1</div>
+      <div class="brand"><span class="brand-mark">AI</span>LINEN BLUE / v1</div>
       <nav aria-label="문서 목차">
         <a href="#principles">원칙</a>
         <a href="#tokens">토큰</a>
@@ -602,7 +605,7 @@
       <div class="hero-copy">
         <span class="eyebrow">AI agent × production</span>
         <h1 id="hero-title">강의 전체를 하나의<br><span style="color:var(--lime)">시각 언어</span>로.</h1>
-        <p class="hero-lead">〈AI 에이전트로 프로덕션 풀스택 출시하기〉의 영상 슬라이드, Canva 템플릿, 썸네일을 같은 규칙으로 만드는 디자인 시스템입니다.</p>
+        <p class="hero-lead">〈AI 에이전트로 프로덕션 풀스택 출시하기〉의 영상 슬라이드와 GitHub Pages 자료실에 함께 적용하는 Linen Blue 디자인 시스템입니다. 기존 문서 주소는 유지하고 승인된 시각 규칙으로 갱신했습니다.</p>
       </div>
       <div class="hero-panel" aria-label="디자인 시스템 핵심 규칙">
         <div class="hero-rule"><b>01</b><span><strong>메시지 우선</strong><br>한 화면에는 한 가지 주장만 남깁니다.</span></div>
@@ -619,40 +622,40 @@
       <div class="principles">
         <article class="principle card"><span class="num">01</span><h3>한 장, 한 문장</h3><p>제목 하나가 그 장의 결론이 되어야 합니다. 본문은 최대 세 덩어리까지만 허용합니다.</p></article>
         <article class="principle card"><span class="num">02</span><h3>기능보다 흐름</h3><p>스크린샷을 나열하지 않고, 입력·판단·결과가 연결되는 구조를 먼저 보여줍니다.</p></article>
-        <article class="principle card"><span class="num">03</span><h3>강조색은 의미</h3><p>라임은 진행, 시안은 정보, 코랄은 위험·오류에만 사용합니다. 임의 장식은 금지합니다.</p></article>
+        <article class="principle card"><span class="num">03</span><h3>강조색은 의미</h3><p>블루는 링크·현재 위치·핵심어에만 사용합니다. 완료는 녹색, 주의는 갈색, 실제 오류는 적색으로 구분하고 문구를 함께 제공합니다.</p></article>
         <article class="principle card"><span class="num">04</span><h3>완료는 증거로</h3><p>TEST, PUBLIC URL, RUN LOG, RUNBOOK 배지를 반복해 “출시 완료”의 기준을 학습시킵니다.</p></article>
       </div>
     </section>
 
     <section id="tokens">
       <div class="section-head">
-        <div><span class="kicker">02 / Color tokens</span><h2>색상은 다섯 개면 충분합니다</h2></div>
-        <p class="section-intro">네이비를 무대로, 오프화이트를 본문으로 사용합니다. 라임·시안·코랄은 역할이 있을 때만 등장합니다.</p>
+        <div><span class="kicker">02 / Color tokens</span><h2>배경은 고정하고, 강조는 절제합니다</h2></div>
+        <p class="section-intro">표지부터 코드·정리까지 Linen 배경을 유지합니다. 먹색 본문과 블루 강조를 사용하고, 완료·주의·오류 색은 해당 상태에만 적용합니다.</p>
       </div>
       <div class="palette">
-        <article class="swatch card"><div class="swatch-color" style="background:#10233f"></div><div class="swatch-meta"><strong>Production Navy</strong><code>#10233F</code><span>주 배경 · 기술적 신뢰</span></div></article>
-        <article class="swatch card"><div class="swatch-color" style="background:#f6f2e9"></div><div class="swatch-meta"><strong>Warm Paper</strong><code>#F6F2E9</code><span>본문 · 밝은 배경</span></div></article>
-        <article class="swatch card"><div class="swatch-color" style="background:#b7d75d"></div><div class="swatch-meta"><strong>Launch Lime</strong><code>#B7D75D</code><span>진행 · 완료 · CTA</span></div></article>
-        <article class="swatch card"><div class="swatch-color" style="background:#57c8d4"></div><div class="swatch-meta"><strong>Signal Cyan</strong><code>#57C8D4</code><span>정보 · 연결 · AI</span></div></article>
-        <article class="swatch card"><div class="swatch-color" style="background:#ef765f"></div><div class="swatch-meta"><strong>Risk Coral</strong><code>#EF765F</code><span>오류 · 대비 · 경고</span></div></article>
+        <article class="swatch card"><div class="swatch-color swatch-canvas"></div><div class="swatch-meta"><strong>Linen Canvas</strong><code>#EBE8E0</code><span>웹·슬라이드 고정 배경</span></div></article>
+        <article class="swatch card"><div class="swatch-color swatch-surface"></div><div class="swatch-meta"><strong>Surface</strong><code>#F4F1E9</code><span>강의 목록 · 패널</span></div></article>
+        <article class="swatch card"><div class="swatch-color swatch-ink"></div><div class="swatch-meta"><strong>Ink</strong><code>#232B36</code><span>제목 · 본문 · 핵심 숫자</span></div></article>
+        <article class="swatch card"><div class="swatch-color swatch-action"></div><div class="swatch-meta"><strong>Action Blue</strong><code>#2856C5</code><span>링크 · 현재 위치 · 주 CTA</span></div></article>
+        <article class="swatch card"><div class="swatch-color swatch-secondary"></div><div class="swatch-meta"><strong>Secondary Text</strong><code>#59616B</code><span>설명 · 시간 · 페이지 번호</span></div></article>
       </div>
     </section>
 
     <section id="type">
       <div class="section-head">
         <div><span class="kicker">03 / Typography</span><h2>크게 말하고, 짧게 설명합니다</h2></div>
-        <p class="section-intro">Canva 기본 폰트로도 재현되도록 Noto Sans KR 계열을 중심으로 설계합니다. 코드와 증거 배지는 Roboto Mono를 사용합니다.</p>
+        <p class="section-intro">Pretendard Variable을 웹과 슬라이드에 함께 사용합니다. Noto Sans KR은 대체 고딕체이며 코드에는 Consolas를 사용합니다. 제목 자간은 -0.025em, 본문은 -0.01em입니다.</p>
       </div>
       <div class="type-grid">
         <article class="type-card card">
-          <span class="kicker">Display / Noto Sans KR Black</span>
+          <span class="kicker">Display / Pretendard Variable</span>
           <div class="type-sample-display">코드 생성은<br>출시가 아니다.</div>
-          <div class="type-meta"><div><b>96–120 px</b><span>16:9 제목</span></div><div><b>900</b><span>굵기</span></div><div><b>-5%</b><span>자간</span></div></div>
+          <div class="type-meta"><div><b>88 / 72 px</b><span>표지 / 일반 제목</span></div><div><b>750</b><span>굵기</span></div><div><b>-0.025em</b><span>자간</span></div></div>
         </article>
         <article class="type-card card">
-          <span class="kicker">Body / Noto Sans KR Regular</span>
+          <span class="kicker">Body / Pretendard Variable</span>
           <p class="type-sample-body">설명은 제목을 반복하지 않습니다. 수강생이 다음 판단을 내리는 데 필요한 조건, 이유, 증거만 남깁니다.</p>
-          <div class="type-meta"><div><b>32–40 px</b><span>영상 본문</span></div><div><b>400–700</b><span>굵기</span></div><div><b>150%</b><span>행간</span></div></div>
+          <div class="type-meta"><div><b>36 px</b><span>슬라이드 본문</span></div><div><b>450</b><span>굵기</span></div><div><b>155%</b><span>행간</span></div></div>
         </article>
       </div>
     </section>
@@ -660,18 +663,18 @@
     <section id="grid">
       <div class="section-head">
         <div><span class="kicker">04 / Grid & spacing</span><h2>안전영역을 먼저 잠급니다</h2></div>
-        <p class="section-intro">슬라이드는 1920×1080 기준입니다. 가장자리 10%를 비우고 12열 그리드를 사용하면 녹화 크롭과 자막이 추가되어도 핵심 정보가 살아남습니다.</p>
+        <p class="section-intro">슬라이드는 1920×1080 기준으로 좌우 128px, 상하 96px의 안전 여백을 둡니다. 웹 콘텐츠는 최대 1120px, 외곽 여백은 데스크톱 32px·모바일 20px입니다.</p>
       </div>
       <div class="rules-grid">
         <article class="rule-card card">
-          <strong>12-column / 10% safe area</strong>
-          <div class="grid-demo"><span class="safe-label">SAFE AREA · 192 px / 108 px</span><div class="grid-cols" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
+          <strong>1920 × 1080 / fixed safe area</strong>
+          <div class="grid-demo"><span class="safe-label">SAFE AREA · 128 px / 96 px</span><div class="grid-cols" aria-hidden="true"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div></div>
         </article>
         <article class="rule-card card">
           <strong>공간 규칙</strong>
           <div class="rule-list">
-            <div class="rule-item"><b>8</b><p><strong>기본 단위 8px</strong><br>모든 간격과 모서리는 8의 배수로 맞춥니다.</p></div>
-            <div class="rule-item"><b>10</b><p><strong>가장자리 10%</strong><br>제목·배지·버튼은 안전영역 밖으로 내보내지 않습니다.</p></div>
+            <div class="rule-item"><b>4</b><p><strong>간격 토큰</strong><br>4·8·12·16·24·32·48·64px를 사용합니다. 버튼·코드는 8px, 목록·패널은 12px 모서리입니다.</p></div>
+            <div class="rule-item"><b>↔</b><p><strong>좌우 128px · 상하 96px</strong><br>제목·배지·페이지 번호는 같은 안전영역 안에 정렬합니다.</p></div>
             <div class="rule-item"><b>65</b><p><strong>본문 폭 65%</strong><br>긴 문장은 화면 전체 폭을 쓰지 않습니다.</p></div>
             <div class="rule-item"><b>03</b><p><strong>정보 덩어리 최대 3개</strong><br>네 개 이상이면 카드형 또는 다음 장으로 분리합니다.</p></div>
           </div>
@@ -687,10 +690,10 @@
       <div class="component-grid">
         <article class="component card"><h3>Lesson chip</h3><p>강의 번호와 현재 단계. 모든 장의 좌상단 고정.</p><div class="component-stage"><span class="lesson-chip">SECTION 02 · LESSON 2-3</span></div></article>
         <article class="component card"><h3>Evidence badges</h3><p>완료 기준을 시각적으로 고정하는 증거 배지.</p><div class="component-stage"><div class="evidence-row"><span class="evidence">TEST</span><span class="evidence">PUBLIC URL</span><span class="evidence">RUN LOG</span><span class="evidence">RUNBOOK</span></div></div></article>
-        <article class="component card"><h3>Step flow</h3><p>행동 순서와 반복 루프. 화살표는 라임으로 통일.</p><div class="component-stage"><div class="step-flow"><span>목표</span><i>→</i><span>변경</span><i>→</i><span>검증</span></div></div></article>
+        <article class="component card"><h3>Step flow</h3><p>행동 순서와 반복 루프. 중립색 번호와 화살표로 연결합니다.</p><div class="component-stage"><div class="step-flow"><span>목표</span><i>→</i><span>변경</span><i>→</i><span>검증</span></div></div></article>
         <article class="component card"><h3>Screen frame</h3><p>실제 화면을 넣는 16:9 데모 프레임.</p><div class="component-stage"><div class="screen-frame"><div class="screen-bar"><i></i><i></i><i></i></div><div class="screen-body"><b></b><b></b></div></div></div></article>
-        <article class="component card"><h3>Status label</h3><p>현재 상태를 짧게 표시. READY·BLOCKED·DONE만 사용.</p><div class="component-stage"><span class="lesson-chip" style="color:var(--navy);border:0;background:var(--lime)">STATUS · DONE</span></div></article>
-        <article class="component card"><h3>Risk marker</h3><p>실패·주의·금지 메시지에만 코랄을 사용.</p><div class="component-stage"><span style="color:var(--coral);font-size:54px;font-weight:900;line-height:1">×</span></div></article>
+        <article class="component card"><h3>Status label</h3><p>현재 상태를 짧게 표시. READY·BLOCKED·DONE만 사용.</p><div class="component-stage"><span class="lesson-chip status-done">✓ 완료 · DONE</span></div></article>
+        <article class="component card"><h3>Risk marker</h3><p>실제 오류는 적색, 주의는 갈색으로 구분하고 원인을 문구로 제공합니다.</p><div class="component-stage"><span style="color:var(--coral);font-size:54px;font-weight:900;line-height:1">×</span></div></article>
       </div>
     </section>
 
@@ -760,24 +763,24 @@
         <article class="check-card card">
           <h3>해야 하는 것</h3>
           <div class="check-row"><b>✓</b><p>제목만 읽어도 논리 흐름이 연결된다.</p></div>
-          <div class="check-row"><b>✓</b><p>모든 핵심 정보가 10% 안전영역 안에 있다.</p></div>
-          <div class="check-row"><b>✓</b><p>라임·시안·코랄이 정해진 의미로만 쓰였다.</p></div>
+          <div class="check-row"><b>✓</b><p>모든 핵심 정보가 좌우 128px·상하 96px 안전영역 안에 있다.</p></div>
+          <div class="check-row"><b>✓</b><p>배경이 일정하고 블루·완료·주의·오류 색이 각 역할에만 쓰였다.</p></div>
           <div class="check-row"><b>✓</b><p>완료 장면에는 증거 배지가 최소 하나 있다.</p></div>
         </article>
         <article class="check-card card">
           <h3>피해야 하는 것</h3>
           <div class="check-row no"><b>×</b><p>한 장에 문단, 표, 스크린샷을 모두 넣는다.</p></div>
-          <div class="check-row no"><b>×</b><p>강조하려고 세 가지 포인트 색을 동시에 쓴다.</p></div>
+          <div class="check-row no"><b>×</b><p>강조하려고 어두운 배경으로 반전하거나 여러 강조색을 동시에 쓴다.</p></div>
           <div class="check-row no"><b>×</b><p>실제 의미 없이 스톡 인물 사진을 배치한다.</p></div>
-          <div class="check-row no"><b>×</b><p>본문을 32px보다 작게 줄여 억지로 맞춘다.</p></div>
+          <div class="check-row no"><b>×</b><p>본문 36px을 줄여 억지로 맞춘다. 내용이 길면 장을 나눈다.</p></div>
         </article>
       </div>
     </section>
 
     <section>
       <div class="handoff card">
-        <div><h3>Canva 구현 기준</h3><p>1920×1080 · Noto Sans KR + Roboto Mono · 10% safe area · 12 masters · 강의별로 복제 후 콘텐츠만 교체 · 전환은 Dissolve 0.3초 또는 Slide 0.4초 중 하나만 사용</p></div>
-        <span class="version">SYSTEM v0.1</span>
+        <div><h3>웹 · 슬라이드 구현 기준</h3><p>1920×1080 · Pretendard Variable + Consolas · 좌우 128px·상하 96px · 12 masters · Linen 배경 고정 · 기본 전환 0ms · 모바일 웹보기는 세로 재배치 · 키보드 초점과 44px 조작 영역 보존</p></div>
+        <span class="version">LINEN BLUE v1</span>
       </div>
     </section>
   </main>

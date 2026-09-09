@@ -1,37 +1,44 @@
-/* Section 00 extends the existing navy/paper lecture visual system. */
+/* Linen Blue section layouts. Compact existing multi-column content is preserved. */
 .section00 h2{font-size:72px}
-.section00 .lead{font-size:31px}
-.section00 .takeaway{font-size:27px;margin-top:28px;padding-top:22px}
-.section00 .project-grid{margin-top:35px;gap:35px}
-.section00 .project-grid h3{font-size:37px;margin:20px 0}
-.section00 .project-grid p{font-size:26px;min-height:100px;line-height:1.65}
-.section00 .project-grid b{font-size:23px;margin-top:20px}
-.section00 .translation{margin-top:30px;gap:30px}
+.section00 .lead{font-size:36px}
+.section00 .takeaway{font-size:28px;margin-top:28px;padding-top:24px}
+.section00 .project-grid{margin-top:32px;gap:32px}
+.section00 .project-grid h3{font-size:38px;margin:20px 0}
+.section00 .project-grid p{font-size:28px;min-height:100px;line-height:1.55}
+.section00 .project-grid b{font-size:26px;margin-top:20px}
+.section00 .translation{margin-top:32px;gap:32px}
 .section00 .translation article{padding:28px 32px}
-.section00 .translation h3{font-size:39px;line-height:1.45;margin-top:16px}
-.section00 .translation p{font-size:25px;line-height:1.65}
-.section00 .check-grid{margin-top:30px;gap:16px 40px}
-.section00 .check-grid p{padding:24px 0;font-size:28px;line-height:1.55}
-.section00 .paper .check-grid b{color:#227b85}
-.section00 .paper em{color:#227b85}
-.section00 .route{margin-top:34px}
-.section00 .route h3{font-size:43px;margin:20px 0}
-.section00 .route p{font-size:26px}
-.section00 .navy .route article{border-top-color:var(--line)}
-.section00 .code-example{margin:32px 0 0;padding:26px 32px;border:1px solid var(--line);border-left:5px solid var(--cyan);border-radius:8px;background:#050b1466;color:var(--paper);font:25px/1.7 Consolas,"Malgun Gothic",monospace;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal}
-.section00 .paper .code-example{background:#e6eceb;color:var(--navy);border-left-color:#227b85}
-.section00 .lesson-table{width:100%;border-collapse:collapse;margin-top:32px;font-size:27px;line-height:1.5;table-layout:fixed}
-.section00 .lesson-table th,.section00 .lesson-table td{text-align:left;padding:15px 22px;border-bottom:1px solid var(--line);vertical-align:top}
-.section00 .lesson-table th{color:var(--cyan);font-size:22px;font-weight:800}
-.section00 .paper .lesson-table th{color:#227b85}
+.section00 .translation h3{font-size:40px;line-height:1.3;margin-top:16px}
+.section00 .translation p{font-size:28px;line-height:1.55}
+.section00 .check-grid{margin-top:32px;gap:16px 40px}
+.section00 .check-grid p{padding:24px 0;font-size:30px;line-height:1.55}
+.section00 .paper .check-grid b{color:var(--course-action)}
+.section00 .paper em{color:var(--course-action)}
+.section00 .route{margin-top:32px}
+.section00 .route h3{font-size:44px;margin:20px 0}
+.section00 .route p{font-size:28px}
+.section00 .navy .route article{border-top-color:var(--course-line)}
+.section00 .code-example{margin:32px 0 0;padding:24px 32px;border:1px solid var(--course-line);border-left:3px solid var(--course-action);border-radius:8px;background:var(--course-inset);color:var(--course-ink);font:450 30px/1.55 var(--course-font-code);letter-spacing:0;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal}
+.section00 .paper .code-example{background:var(--course-inset);color:var(--course-ink);border-left-color:var(--course-action)}
+.section00 .lesson-table{width:100%;border-collapse:collapse;margin-top:32px;font-size:28px;line-height:1.5;table-layout:fixed}
+.section00 .lesson-table th,.section00 .lesson-table td{text-align:left;padding:16px 24px;border-bottom:1px solid var(--course-line);vertical-align:top;overflow-wrap:anywhere}
+.section00 .lesson-table th{color:var(--course-ink);font-size:24px;font-weight:650}
+.section00 .paper .lesson-table th{color:var(--course-ink)}
 .section00 .lesson-table th:first-child{width:39%}
-.section00 .footnote{font-size:21px;margin-top:20px}
-.section00 .fine{font-size:20px;line-height:1.5}
-.section00 .pipeline{margin-top:36px}
-.section00 .pipeline h3{font-size:34px}
-.section00 .pipeline p{font-size:24px}
-.section00 .dense-code .code-example{font-size:24px;line-height:1.4;padding:22px 30px;margin-top:23px}
-.section00 .dense-code h2{font-size:65px}
-.section00 .mixed-content .code-example{font-size:24px;line-height:1.45;padding:20px 28px;margin-top:23px}
+.section00 .footnote{font-size:24px;margin-top:20px}
+.section00 .fine{font-size:24px;line-height:1.5}
+.section00 .pipeline{margin-top:32px}
+.section00 .pipeline h3{font-size:36px}
+.section00 .pipeline p{font-size:28px}
+/* Existing dense / mixed slides are explicit fit exceptions, not global body sizes. */
+.section00 .dense-code .code-example{font-size:24px;line-height:1.4;padding:24px 32px;margin-top:24px}
+.section00 .dense-code h2{font-size:72px}
+.section00 .mixed-content .code-example{font-size:24px;line-height:1.45;padding:20px 28px;margin-top:24px}
 .section00 .mixed-content .lesson-table{font-size:25px;margin-top:20px}
 .section00 .mixed-content .lesson-table th,.section00 .mixed-content .lesson-table td{padding:12px 20px}
+@media screen and (max-width:760px){
+html:not(.presentation-mode):not(:fullscreen) .section00 .code-example{font-size:16px;line-height:1.6;padding:16px;margin-top:24px;max-width:100%;white-space:pre-wrap;overflow-wrap:anywhere}
+html:not(.presentation-mode):not(:fullscreen) .section00 .lesson-table{font-size:16px;line-height:1.6;margin-top:24px}
+html:not(.presentation-mode):not(:fullscreen) .section00 .lesson-table th,html:not(.presentation-mode):not(:fullscreen) .section00 .lesson-table td{font-size:16px;padding:12px 8px;overflow-wrap:anywhere;word-break:normal}
+html:not(.presentation-mode):not(:fullscreen) .section00 .translation .highlight h3{font-size:28px}
+}

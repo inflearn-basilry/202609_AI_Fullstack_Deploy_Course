@@ -33,6 +33,7 @@ jobs:
           node tests/validate-orientation.cjs
           node tests/validate-section00.cjs
           node tests/validate-public-boundary.cjs
+          node tests/validate-linen-theme.cjs
 
       - name: Upload static site
         uses: actions/upload-pages-artifact@v4

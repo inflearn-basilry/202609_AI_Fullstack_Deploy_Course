@@ -1,0 +1,49 @@
+/* Linen Blue v1 — shared by the course catalog, references and all slides. */
+@font-face {
+  font-family: 'Pretendard Variable';
+  font-style: normal;
+  font-weight: 45 920;
+  font-display: swap;
+  src: url('./fonts/PretendardVariable.woff2') format('woff2');
+}
+:root {
+  color-scheme: light;
+  --course-canvas: #ebe8e0;
+  --course-surface: #f4f1e9;
+  --course-inset: #e2ded4;
+  --course-ink: #232b36;
+  --course-text-secondary: #59616b;
+  --course-line: #c9c5bc;
+  --course-control-border: #817d74;
+  --course-action: #2856c5;
+  --course-action-hover: #2147a6;
+  --course-action-active: #193a89;
+  --course-action-soft: #dfe5f2;
+  --course-on-action: #ffffff;
+  --course-success: #246348;
+  --course-success-soft: #dfe9df;
+  --course-warning: #8a4b12;
+  --course-warning-soft: #f1e5d4;
+  --course-danger: #a43136;
+  --course-danger-soft: #f1dfdc;
+  --course-font-sans: 'Pretendard Variable', Pretendard, 'Noto Sans KR', 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+  --course-font-code: Consolas, 'SFMono-Regular', monospace;
+  --course-weight-title: 750;
+  --course-weight-subtitle: 650;
+  --course-weight-body: 450;
+  --course-radius-control: 8px;
+  --course-radius-panel: 12px;
+  --course-control-height: 44px;
+  --course-content-max: 1120px;
+  --course-motion-control: 120ms;
+  --course-motion-slide: 0ms;
+}
+html { background: var(--course-canvas); }
+body { font-family: var(--course-font-sans); color: var(--course-ink); }
+button, input, select, textarea { font: inherit; }
+:focus-visible { outline: 3px solid var(--course-action); outline-offset: 3px; }
+::selection { background: var(--course-action-soft); color: var(--course-ink); }
+@media (prefers-reduced-motion: reduce) {
+  :root { --course-motion-control: 0ms; --course-motion-slide: 0ms; }
+  html { scroll-behavior: auto; }
+}

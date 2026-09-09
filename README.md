@@ -5,7 +5,7 @@
 ## 학생용 사이트
 
 - GitHub Pages: https://inflearn-basilry.github.io/202609_AI_Fullstack_Deploy_Course/
-- main에 푸시하면 세 가지 검사 후 dist/만 배포합니다.
+- main에 푸시하면 네 가지 검사 후 dist/만 배포합니다.
 - 공개 자료는 슬라이드·커리큘럼·디자인 시스템이며 스크립트·발표자 노트는 제외합니다.
 
 ## 파일과 원본 관리
@@ -24,6 +24,8 @@
 과거 원격 Git 이력은 재작성하지 않았으므로 이미 공개한 원문이나 복사본은 남을 수 있습니다. 아직 푸시하지 않았던 새 대본은 새 커밋 이력에서도 제외했습니다. OAuth는 도입하지 않았습니다.
 
 ## 현재 슬라이드
+
+학생용 자료실·커리큘럼·디자인 가이드·전체 75장에 Linen Blue v1을 적용했습니다. 공통 색상은 dist/assets/course-theme.css, Pretendard Variable은 로컬 WOFF2와 OFL 라이선스로 제공합니다. 작은 화면에서는 슬라이드를 세로로 읽고, 데스크톱과 전체화면에서는 16:9 구성을 유지합니다.
 
 제작된 0-0~0-6은 v0.2 편성 기준의 7개 강의·75장·목표 편집 분량 56분입니다. v0.4 커리큘럼과 수업 구성·시간이 다르며 재편집은 별도 작업입니다. 0-2는 목표 화면·합성 예시이고 0-6의 starter·doctor는 구현·배포가 필요한 실습 계약입니다.
 
@@ -49,6 +51,7 @@
 - node tests/validate-orientation.cjs
 - node tests/validate-section00.cjs
 - node tests/validate-public-boundary.cjs
+- node tests/validate-linen-theme.cjs
 - 공개 미리보기: python -m http.server 8765 --bind 127.0.0.1 --directory dist
 - 강사용 로컬 미리보기: python -m http.server 8766 --bind 127.0.0.1 --directory .private/instructor/site
 

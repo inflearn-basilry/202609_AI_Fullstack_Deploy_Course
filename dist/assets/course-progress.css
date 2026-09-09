@@ -1,19 +1,166 @@
-.progress-check{display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:8px 12px;margin:10px 0 0 14px;border:1px solid #91a3ab;border-radius:8px;color:#10233f;background:#fffdf8;cursor:pointer;font:700 14px/1.4 Pretendard,"Malgun Gothic",sans-serif;vertical-align:middle;white-space:nowrap}
-.progress-check input{width:18px;height:18px;margin:0;accent-color:#227b85;cursor:pointer;flex:0 0 auto}
-.progress-check:has(input:focus-visible){outline:3px solid #227b85;outline-offset:3px}
-.progress-check[data-completed="true"]{border-color:#52781b;background:#eff6dc}
-.lesson-row[data-completed="true"] .lesson-no{color:#3b6817}
-.lessons .progress-check{display:flex;width:max-content;margin:10px 0 0;font-size:12px}
-.course-progress-summary{padding:20px 0;border-bottom:1px solid #d4d8dc;margin-bottom:8px}
-.course-progress-summary .progress-count{font:800 16px/1.5 Pretendard,"Malgun Gothic",sans-serif;color:#10233f}
-.progress-notice{margin:7px 0 0!important;color:#526077!important;font:13px/1.65 Pretendard,"Malgun Gothic",sans-serif!important;max-width:800px}
-.progress-notice[data-warning="true"]{color:#9b422f!important}
-.lesson-progress{margin-top:35px;padding:18px;border:1px solid #91a3ab;border-radius:10px}
-.lesson-progress .progress-check{margin:0}
-.lesson-progress.floating{position:fixed;top:10px;left:10px;z-index:21;margin:0;padding:0;border:0;background:transparent;max-width:280px}
-.lesson-progress.floating .progress-check{min-height:34px;padding:6px 9px;background:#0a172b;color:#f6f2e9;font-size:12px;border-color:#61738a}
-.lesson-progress.floating .progress-check[data-completed="true"]{background:#eff6dc;color:#10233f}
-.lesson-progress.floating .progress-notice{position:absolute;top:100%;left:0;padding:8px;border-radius:6px;background:#f6f2e9;width:270px;display:none}
-.lesson-progress.floating:hover .progress-notice,.lesson-progress.floating:focus-within .progress-notice{display:block}
-@media(max-width:520px){.course-progress-summary{padding:17px 0}.progress-notice{font-size:12px!important}}
-@media print{.progress-check,.course-progress-summary,.lesson-progress{display:none!important}}
+/* Linen Blue · shared learning-progress UI.
+   Load assets/course-theme.css first. Progress data and behaviour remain in
+   course-progress.js; this stylesheet does not change storage or lesson IDs. */
+.progress-check {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 8px;
+  min-height: 44px;
+  max-width: 100%;
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px solid var(--course-control-border);
+  border-radius: 8px;
+  background: var(--course-surface);
+  color: var(--course-ink);
+  font: 650 14px/1.5 var(--course-font-sans);
+  letter-spacing: -.01em;
+  vertical-align: middle;
+  cursor: pointer;
+  color-scheme: light;
+  transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.progress-check:hover { background: var(--course-inset); }
+.progress-check input {
+  flex: 0 0 auto;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: var(--course-success);
+  cursor: pointer;
+}
+.progress-check span { overflow-wrap: anywhere; }
+.progress-check input:focus-visible,
+.progress-check:has(input:focus-visible) {
+  outline: 3px solid var(--course-action);
+  outline-offset: 3px;
+}
+.progress-check:has(input:focus-visible) input { outline: none; }
+.progress-check[data-completed="true"] {
+  border-color: var(--course-success);
+  background: var(--course-success-soft);
+  color: var(--course-success);
+}
+.lesson-row[data-completed="true"] .lesson-no { color: var(--course-success); }
+.lessons .progress-check {
+  display: flex;
+  width: max-content;
+  margin: 12px 0 0;
+  font-size: 14px;
+}
+
+.course-progress-summary {
+  margin: 0 0 8px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--course-line);
+  color: var(--course-ink);
+}
+.course-progress-summary .progress-count {
+  color: var(--course-ink);
+  font: 650 16px/1.5 var(--course-font-sans);
+  letter-spacing: -.01em;
+}
+.progress-notice {
+  max-width: 800px;
+  margin: 8px 0 0 !important;
+  color: var(--course-text-secondary) !important;
+  font: 450 14px/1.65 var(--course-font-sans) !important;
+  letter-spacing: -.01em;
+  overflow-wrap: anywhere;
+}
+.progress-notice[data-warning="true"] {
+  padding: 10px 12px;
+  border: 1px solid var(--course-warning);
+  border-radius: 8px;
+  background: var(--course-warning-soft);
+  color: var(--course-warning) !important;
+}
+.lesson-progress {
+  margin-top: 32px;
+  padding: 16px;
+  border: 1px solid var(--course-line);
+  border-radius: 12px;
+  background: var(--course-surface);
+  color: var(--course-ink);
+}
+.lesson-progress .progress-check { margin: 0; }
+
+/* The player owns the bottom navigation. Reserve the top-left for completion;
+   the responsive reading view should leave 72px above its first content. */
+.lesson-progress.floating {
+  position: fixed;
+  top: max(12px, env(safe-area-inset-top));
+  left: max(12px, env(safe-area-inset-left));
+  z-index: 21;
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+}
+.lesson-progress.floating .progress-check {
+  min-height: 44px;
+  padding: 10px 12px;
+  font-size: 14px;
+  box-shadow: none;
+}
+.lesson-progress.floating .progress-notice {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: min(320px, calc(100vw - 24px));
+  max-height: calc(100dvh - 148px);
+  overflow-y: auto;
+  margin-top: 8px !important;
+  padding: 12px;
+  border: 1px solid var(--course-control-border);
+  border-radius: 8px;
+  background: var(--course-surface);
+  box-shadow: 0 4px 12px rgb(35 43 54 / 8%);
+}
+.lesson-progress.floating:hover .progress-notice,
+.lesson-progress.floating:focus-within .progress-notice,
+.lesson-progress.floating .progress-notice[data-warning="true"] { display: block; }
+.lesson-progress.floating .progress-notice[data-warning="true"] {
+  border-color: var(--course-warning);
+  background: var(--course-warning-soft);
+}
+
+/* A persistent failure message must not cover mobile slide content. */
+@media screen and (max-width: 760px) {
+  html:not(:fullscreen) body:has(.lesson-progress.floating .progress-notice[data-warning="true"]) {
+    display: flex;
+    flex-direction: column;
+  }
+  html:not(:fullscreen) .lesson-progress.floating:has(.progress-notice[data-warning="true"]) {
+    position: relative;
+    order: -1;
+    top: auto;
+    left: auto;
+    margin: 12px;
+    flex: 0 0 auto;
+  }
+  html:not(:fullscreen) .lesson-progress.floating .progress-notice[data-warning="true"] {
+    position: static;
+    max-height: none;
+    overflow: visible;
+  }
+}
+@media (max-width: 520px) {
+  .course-progress-summary { padding: 16px 0; }
+  .lesson-progress { padding: 12px; }
+  .lesson-progress.floating { padding: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .progress-check { transition: none; }
+}
+@media print {
+  .progress-check,
+  .course-progress-summary,
+  .lesson-progress { display: none !important; }
+}
