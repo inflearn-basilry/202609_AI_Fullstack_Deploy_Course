@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="ko">
 <head>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="AI 에이전트로 프로덕션 풀스택 출시하기 — 9개 섹션, 41개 수업, 7개 미션으로 구성된 강의 커리큘럼">
@@ -453,6 +455,7 @@
     }
 
     .section-footer {
+      color: var(--navy);
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 22px;
@@ -462,7 +465,7 @@
       background: rgba(87, 200, 212, .07);
     }
 
-    .mission strong { display: block; margin-bottom: 4px; font-size: 16px; }
+    .mission strong { color: var(--navy); display: block; margin-bottom: 4px; font-size: 16px; }
     .mission p { margin: 0; color: var(--ink-muted); font-size: 14px; }
 
     .output {
@@ -471,8 +474,8 @@
       border-left: 3px solid var(--coral);
     }
 
-    .output small { display: block; color: var(--coral); font: 850 11px/1 var(--mono); letter-spacing: .07em; }
-    .output b { display: block; margin-top: 6px; font-size: 14px; line-height: 1.4; }
+    .output small { display: block; color: #9b422f; font: 850 12px/1 var(--mono); letter-spacing: .07em; }
+    .output b { color: var(--navy); display: block; margin-top: 6px; font-size: 14px; line-height: 1.4; }
 
     .method {
       margin-top: 84px;
@@ -577,21 +580,21 @@
 
     .outcome::before { content: "✓"; color: #278d98; font: 900 17px/1.5 var(--mono); }
 
-    footer {
+    body > footer {
       padding: 44px 0;
       color: rgba(246, 242, 233, .56);
       background: var(--navy-deep);
     }
 
-    footer .shell {
+    body > footer .shell {
       display: flex;
       justify-content: space-between;
       gap: 24px;
       align-items: center;
     }
 
-    footer strong { color: var(--paper); font-size: 14px; }
-    footer small { font: 700 11px/1.4 var(--mono); letter-spacing: .06em; }
+    body > footer strong { color: var(--paper); font-size: 14px; }
+    body > footer small { font: 700 11px/1.4 var(--mono); letter-spacing: .06em; }
 
     @media (max-width: 980px) {
       .overview-grid { grid-template-columns: 1fr 1fr; }
@@ -638,7 +641,7 @@
       .rhythm-step { min-height: 130px; }
       .rhythm-step::after { display: none !important; }
       .completion { margin-inline: -14px; padding: 32px 20px; }
-      footer .shell { align-items: flex-start; flex-direction: column; }
+      body > footer .shell { align-items: flex-start; flex-direction: column; }
     }
 
     @media (max-width: 480px) {

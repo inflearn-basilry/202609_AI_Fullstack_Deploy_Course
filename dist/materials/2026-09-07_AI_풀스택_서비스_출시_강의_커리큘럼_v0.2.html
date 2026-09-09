@@ -1,9 +1,13 @@
 <!doctype html>
 <html lang="ko">
 <head>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <link rel="stylesheet" href="../assets/course-progress.css">
+  <script src="../assets/course-progress.js" defer></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="AI 에이전트로 프로덕션 풀스택 출시하기 — 본편 9개 섹션, 43개 수업, 7개 미션과 Orca 부록으로 구성된 강의 커리큘럼">
+  <meta name="description" content="AI 에이전트로 프로덕션 풀스택 출시하기 — 오리엔테이션 포함 본편 9개 섹션, 44개 수업, 7개 미션과 Orca 부록으로 구성된 강의 커리큘럼">
   <meta name="theme-color" content="#0a172b">
   <title>강의 커리큘럼 v0.2 · AI 에이전트로 프로덕션 풀스택 출시하기</title>
   <style>
@@ -459,6 +463,7 @@
     }
 
     .section-footer {
+      color: var(--navy);
       display: grid;
       grid-template-columns: 1fr auto;
       gap: 22px;
@@ -468,7 +473,7 @@
       background: rgba(87, 200, 212, .07);
     }
 
-    .mission strong { display: block; margin-bottom: 4px; font-size: 16px; }
+    .mission strong { color: var(--navy); display: block; margin-bottom: 4px; font-size: 16px; }
     .mission p { margin: 0; color: var(--ink-muted); font-size: 14px; }
 
     .output {
@@ -477,8 +482,8 @@
       border-left: 3px solid var(--coral);
     }
 
-    .output small { display: block; color: var(--coral); font: 850 11px/1 var(--mono); letter-spacing: .07em; }
-    .output b { display: block; margin-top: 6px; font-size: 14px; line-height: 1.4; }
+    .output small { display: block; color: #9b422f; font: 850 12px/1 var(--mono); letter-spacing: .07em; }
+    .output b { color: var(--navy); display: block; margin-top: 6px; font-size: 14px; line-height: 1.4; }
 
     .method {
       margin-top: 84px;
@@ -583,21 +588,21 @@
 
     .outcome::before { content: "✓"; color: #278d98; font: 900 17px/1.5 var(--mono); }
 
-    footer {
+    body > footer {
       padding: 44px 0;
       color: rgba(246, 242, 233, .56);
       background: var(--navy-deep);
     }
 
-    footer .shell {
+    body > footer .shell {
       display: flex;
       justify-content: space-between;
       gap: 24px;
       align-items: center;
     }
 
-    footer strong { color: var(--paper); font-size: 14px; }
-    footer small { font: 700 11px/1.4 var(--mono); letter-spacing: .06em; }
+    body > footer strong { color: var(--paper); font-size: 14px; }
+    body > footer small { font: 700 11px/1.4 var(--mono); letter-spacing: .06em; }
 
     @media (max-width: 980px) {
       .overview-grid { grid-template-columns: 1fr 1fr; }
@@ -644,7 +649,7 @@
       .rhythm-step { min-height: 130px; }
       .rhythm-step::after { display: none !important; }
       .completion { margin-inline: -14px; padding: 32px 20px; }
-      footer .shell { align-items: flex-start; flex-direction: column; }
+      body > footer .shell { align-items: flex-start; flex-direction: column; }
     }
 
     @media (max-width: 480px) {
@@ -672,14 +677,14 @@
 
   <section class="hero">
     <div class="shell">
-      <div class="eyebrow">CURRICULUM · v0.2</div>
+      <div class="eyebrow">CURRICULUM · v0.2 · 2026.09.08 수정</div>
       <h1>코드를 넘어<br><span>출시까지 가는</span> 수업</h1>
       <p class="hero-lead">AI 에이전트에게 구현을 맡기되, 목표·계약·테스트·운영 증거는 사람이 책임집니다. 하나의 풀스택 서비스를 실제 공개 URL로 완성하는 전 과정을 따라갑니다.</p>
       <div class="stats" aria-label="강의 구성 요약">
         <div class="stat"><strong>09</strong><span>개 본편 섹션</span></div>
-        <div class="stat"><strong>46</strong><span>개 수업 · 부록 포함</span></div>
+        <div class="stat"><strong>47</strong><span>개 수업 · 부록 포함</span></div>
         <div class="stat"><strong>07</strong><span>개 미션</span></div>
-        <div class="stat"><strong>7:36</strong><span>예상 영상 · 부록 포함</span></div>
+        <div class="stat"><strong>7:46</strong><span>예상 영상 · 부록 포함</span></div>
       </div>
     </div>
   </section>
@@ -729,7 +734,7 @@
       <small>COURSE MAP</small>
       <a href="#overview"><span>00</span>강의 범위</a>
       <a href="#capstone"><span>01</span>캡스톤 프로젝트</a>
-      <a href="#section-0"><span>S0</span>완성 화면과 실습 환경</a>
+      <a href="#section-0"><span>S0</span>오리엔테이션·실습 환경</a>
       <a href="#section-1"><span>S1</span>출시 범위 정하기</a>
       <a href="#section-2"><span>S2</span>저장소 컨텍스트</a>
       <a href="#section-3"><span>S3</span>아키텍처와 계약</a>
@@ -797,6 +802,7 @@
         <header class="curriculum-head">
           <div class="section-kicker">03 · FULL CURRICULUM</div>
           <h2 id="curriculum-title">9개 본편 섹션 + Orca 선택 부록</h2>
+          <p><a href="2026-09-08_0-0_오리엔테이션_강의슬라이드_v0.1.html">0-0 오리엔테이션 슬라이드</a> · — 강사 소개와 함께 만들 결과를 먼저 확인합니다.</p>
           <p>각 섹션은 ‘설명 → 직접 행동 → 검증 가능한 산출물’로 끝납니다. 본편은 Codex·VS Code 기준으로 완주하고, 말미에 Orca–Cursor 멀티에이전트 확장을 선택할 수 있습니다. 🔓 표시는 무료 미리보기 추천 수업입니다.</p>
         </header>
         <div class="curriculum-list" id="curriculum-list"></div>
@@ -848,16 +854,17 @@
   <footer>
     <div class="shell">
       <strong>AI 에이전트로 프로덕션 풀스택 출시하기</strong>
-      <small>COURSE CURRICULUM · v0.2 · 2026.09</small>
+      <small>COURSE CURRICULUM · v0.2 · 2026.09.08 수정</small>
     </div>
   </footer>
 
   <script>
     const sections = [
       {
-        no: "00", duration: "46분", title: "완성 화면과 실습 환경", output: "완성 기준표 · 환경 진단 결과",
+        no: "00", duration: "56분", title: "오리엔테이션·완성 화면과 실습 환경", output: "한 문장 수강 목표 · 완성 기준표 · 환경 진단 결과",
         mission: "결과와 출발선을 함께 확인하기", missionText: "수강 후 남는 결과를 확인하고, 같은 실습 환경에서 첫 테스트까지 통과합니다.",
         lessons: [
+          ["0-0. 오리엔테이션 — 강사 소개와 함께 만들 결과", "10분", "자기소개·경력·기술스택·결과물, 강의 범위·수강 방법", "공개하고 싶은 결과 한 문장 기록"],
           ["0-1. 이 강의가 해결하는 문제", "5분", "AI로 코드는 만들지만 출시하지 못하는 이유", "마지막 미완성 프로젝트 기록"],
           ["0-2. SignalDesk 완성본 둘러보기", "7분", "목록·상세·분석·운영 화면, 테스트, 배포 결과", "완성 기준 확인", true],
           ["0-3. AI가 할 일과 사람이 책임질 일", "5분", "생성·탐색과 결정·승인의 경계", "승인 게이트 4개 확인"],
@@ -977,7 +984,8 @@
       const sectionLabel = isAppendix ? "APPENDIX" : "SECTION";
       const rows = section.lessons.map(function (lesson) {
         const preview = lesson[4] ? '<span class="preview-badge">FREE</span>' : "";
-        return '<tr>' +
+        const lessonId = lesson[0].split('.')[0];
+        return '<tr data-lesson="' + escapeHtml(lessonId) + '">' +
           '<td>' + escapeHtml(lesson[0]) + preview + '</td>' +
           '<td>' + escapeHtml(lesson[1]) + '</td>' +
           '<td>' + escapeHtml(lesson[2]) + '</td>' +

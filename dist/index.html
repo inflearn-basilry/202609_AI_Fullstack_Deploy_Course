@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="ko">
 <head>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <link rel="stylesheet" href="assets/course-progress.css">
+  <script src="assets/course-progress.js" defer></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="AI 에이전트로 프로덕션 풀스택 출시하기 강의 자료실">
@@ -197,30 +201,69 @@
     h2 { margin-bottom: 12px; font-size: clamp(34px, 4vw, 52px); line-height: 1.1; letter-spacing: -.045em; }
     .section-head p { max-width: 740px; margin-bottom: 0; color: var(--muted); }
 
-    .lesson-card {
-      display: grid;
-      grid-template-columns: 170px 1fr auto;
-      gap: 28px;
-      align-items: center;
-      padding: 30px;
+    .catalog-section { scroll-margin-top: 90px; }
+    .catalog-section + .catalog-section { margin-top: 80px; }
+    .chapter {
       border: 1px solid var(--line);
-      border-left: 6px solid var(--lime);
+      border-radius: 16px;
+      overflow: hidden;
       background: #fffdf8;
       box-shadow: var(--shadow);
     }
-
-    .lesson-no { font: 900 58px/1 Consolas, monospace; letter-spacing: -.05em; }
-    .lesson-copy h3 { margin-bottom: 8px; font-size: 26px; letter-spacing: -.03em; }
-    .lesson-copy p { margin-bottom: 0; color: var(--muted); }
-    .lesson-meta { display: block; margin-top: 10px; color: #278d98; font: 750 12px/1.4 Consolas, monospace; letter-spacing: .05em; }
-    .lesson-card .button { color: var(--navy); border-color: var(--navy); white-space: nowrap; }
-    .lesson-card .button:hover { color: var(--navy-deep); border-color: var(--lime); background: var(--lime); }
+    .chapter + .chapter { margin-top: 18px; }
+    .chapter > summary {
+      display: grid;
+      grid-template-columns: 86px minmax(0, 1fr) 24px;
+      align-items: center;
+      gap: 20px;
+      list-style: none;
+      cursor: pointer;
+    }
+    summary::-webkit-details-marker { display: none; }
+    .chapter > summary {
+      min-height: 112px;
+      padding: 27px 30px;
+      color: var(--paper);
+      background: var(--navy);
+    }
+    summary:focus-visible {
+      outline: 3px solid #278d98;
+      outline-offset: -5px;
+    }
+    .chapter > summary:focus-visible { outline-color: var(--lime); }
+    .chapter-no { color: var(--lime); font: 800 15px/1.5 Consolas, monospace; }
+    .chapter-heading { min-width: 0; }
+    .chapter-heading strong { display: block; font-size: 23px; letter-spacing: -.025em; line-height: 1.45; }
+    .chapter-heading small { display: block; margin-top: 7px; color: rgba(246,242,233,.72); font-size: 14px; }
+    .disclosure-icon { width: 22px; height: 22px; position: relative; color: currentColor; }
+    .disclosure-icon::before, .disclosure-icon::after {
+      content: ""; position: absolute; left: 3px; top: 10px; width: 16px; height: 2px;
+      background: currentColor; border-radius: 2px;
+    }
+    .disclosure-icon::after { transform: rotate(90deg); }
+    details[open] > summary .disclosure-icon::after { transform: rotate(0); }
+    .chapter-body { padding: 6px 30px; }
+    .lesson-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 26px; align-items: start; padding: 27px 0; }
+    .lesson-row + .lesson-row { border-top: 1px solid var(--line); }
+    .lesson-main { display: grid; grid-template-columns: 58px minmax(0, 1fr); gap: 18px; align-items: start; }
+    .lesson-no { color: #227b85; font: 800 23px/1.5 Consolas, monospace; }
+    .lesson-heading { min-width: 0; }
+    .lesson-heading h3 { margin: 0; font-size: 19px; font-weight: 800; letter-spacing: -.025em; line-height: 1.55; }
+    .lesson-meta { display: block; margin-top: 7px; color: var(--muted); font-size: 14px; }
+    .lesson-description { margin: 10px 0 0; font-size: 16px; color: var(--muted); line-height: 1.7; }
+    .lesson-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-end; gap: 8px; padding-top: 1px; }
+    .lesson-actions .progress-check { min-height: 44px; margin: 0; padding: 8px 11px; }
+    .material-link { display: inline-flex; align-items: center; justify-content: center; gap: 10px; min-height: 44px; padding: 9px 14px; border: 1px solid var(--navy); border-radius: 8px; color: var(--paper); background: var(--navy); font-weight: 800; font-size: 14px; text-decoration: none; white-space: nowrap; }
+    .material-link.secondary { color: var(--navy); background: transparent; border-color: #91a3ab; }
+    .material-link:hover { color: var(--navy); background: var(--lime); border-color: var(--lime); }
+    .material-link:focus-visible { outline: 3px solid #227b85; outline-offset: 4px; }
+    .catalog-anchor { display: block; scroll-margin-top: 90px; }
 
     .resources { margin-top: 90px; }
 
     .resource-list {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
     }
@@ -233,7 +276,8 @@
       transition: color .18s ease, background .18s ease;
     }
 
-    .resource:last-child { border-right: 0; }
+    .resource:nth-child(even) { border-right: 0; }
+    .resource:nth-child(n+3) { border-top: 1px solid var(--line); }
     .resource:hover, .resource:focus-visible { color: var(--navy-deep); background: rgba(183, 215, 93, .18); outline: none; }
     .resource small { display: block; margin-bottom: 34px; color: #278d98; font: 800 12px/1 Consolas, monospace; letter-spacing: .08em; }
     .resource h3 { margin-bottom: 12px; font-size: 22px; }
@@ -246,9 +290,9 @@
       .hero { min-height: auto; padding: 70px 0; }
       .hero > .shell { grid-template-columns: 1fr; }
       .hero-map { max-width: 620px; }
-      .section-head, .lesson-card { grid-template-columns: 1fr; }
-      .lesson-no { font-size: 38px; }
-      .lesson-card .button { justify-self: start; }
+      .section-head { grid-template-columns: 1fr; }
+      .lesson-row { grid-template-columns: 1fr; gap: 17px; }
+      .lesson-actions { justify-content: flex-start; padding-left: 76px; }
       .resource-list { grid-template-columns: 1fr; }
       .resource { min-height: 0; border-right: 0; border-bottom: 1px solid var(--line); }
       .resource:last-child { border-bottom: 0; }
@@ -260,7 +304,15 @@
       .hero { padding: 54px 0 62px; }
       .hero-map { padding: 22px; }
       main { padding: 62px 0 84px; }
-      .lesson-card { padding: 24px; }
+      .chapter > summary { grid-template-columns: 60px minmax(0, 1fr) 22px; gap: 12px; }
+      .chapter > summary { padding: 22px 18px; }
+      .chapter-heading strong { font-size: 19px; }
+      .chapter-body { padding: 3px 18px; }
+      .lesson-heading h3 { font-size: 17px; }
+      .lesson-main { grid-template-columns: 42px minmax(0, 1fr); gap: 12px; }
+      .lesson-actions { padding-left: 0; }
+      .lesson-row { padding: 22px 0; }
+      .lesson-no { font-size: 21px; }
       footer .shell { flex-direction: column; }
     }
 
@@ -285,7 +337,7 @@
         <h1>AI 에이전트로<br><span>프로덕션 풀스택</span><br>출시하기</h1>
         <p>코드 생성에서 멈추지 않고, 테스트·배포·운영 증거가 남는 서비스 출시 과정을 함께 완성합니다.</p>
         <div class="button-row">
-          <a class="button primary" href="materials/2026-09-07_0-1_이_강의가_해결하는_문제_강의슬라이드_v0.1.html">0-1 강의 시작</a>
+          <a class="button primary" href="materials/2026-09-08_0-0_오리엔테이션_강의슬라이드_v0.1.html">0-0 오리엔테이션 시작</a>
           <a class="button" href="#materials">전체 자료 보기</a>
         </div>
       </div>
@@ -299,33 +351,123 @@
   </section>
 
   <main class="shell" id="materials">
-    <section aria-labelledby="lessons-title">
+    <span class="catalog-anchor" id="scripts" aria-hidden="true"></span>
+    <section class="catalog-section" id="slides" aria-labelledby="lessons-title">
       <div class="section-head">
         <div class="section-index">01 / LESSONS</div>
-        <div><h2 id="lessons-title">강의 슬라이드</h2><p>슬라이드는 방향키로 이동합니다. 발표자 노트는 <strong>N</strong>, 전체화면은 <strong>F</strong> 키로 열 수 있습니다.</p></div>
+        <div><h2 id="lessons-title">강의 자료</h2><p>각 강의의 슬라이드를 바로 열 수 있습니다. 수강한 강의는 완료로 체크해 주세요.</p></div>
       </div>
-      <article class="lesson-card">
-        <div class="lesson-no">0-1</div>
-        <div class="lesson-copy">
-          <h3>이 강의가 해결하는 문제</h3>
-          <p>AI가 코드를 만드는 속도와 서비스를 실제로 출시하는 능력 사이의 간극을 진단합니다.</p>
-          <span class="lesson-meta">8 SLIDES · 05:00 · HTML PRESENTATION</span>
+      <details class="chapter" data-chapter="0" open>
+        <summary>
+          <span class="chapter-no">CH. 00</span>
+          <span class="chapter-heading"><strong>오리엔테이션·완성 화면과 실습 환경</strong><small>총 7개 강의 · 56분</small></span>
+          <span class="disclosure-icon" aria-hidden="true"></span>
+        </summary>
+        <div class="chapter-body">
+          <article class="lesson-row" data-lesson="0-0" aria-labelledby="lesson-0-0-title">
+            <div class="lesson-main">
+              <span class="lesson-no">0-0</span>
+              <div class="lesson-heading">
+                <h3 id="lesson-0-0-title">오리엔테이션 — 강사 소개와 함께 만들 결과</h3>
+                <span class="lesson-meta">12장 · 약 10분</span>
+                <p class="lesson-description">김바실리의 경력과 사용해 온 기술, 실무·개인 프로젝트를 소개하고 수강 목표를 정합니다.</p>
+              </div>
+            </div>
+            <div class="lesson-actions" role="group" aria-label="0-0 강의 자료와 수강 기록">
+              <a class="material-link" data-material="slides" href="materials/2026-09-08_0-0_오리엔테이션_강의슬라이드_v0.1.html" aria-label="0-0 슬라이드 열기">슬라이드 열기<span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="lesson-row" data-lesson="0-1" aria-labelledby="lesson-0-1-title">
+            <div class="lesson-main">
+              <span class="lesson-no">0-1</span>
+              <div class="lesson-heading">
+                <h3 id="lesson-0-1-title">이 강의가 해결하는 문제</h3>
+                <span class="lesson-meta">8장 · 약 5분</span>
+                <p class="lesson-description">AI로 코드를 작성하고도 서비스를 출시하지 못하는 이유를 살펴봅니다.</p>
+              </div>
+            </div>
+            <div class="lesson-actions" role="group" aria-label="0-1 강의 자료와 수강 기록">
+              <a class="material-link" data-material="slides" href="materials/2026-09-07_0-1_이_강의가_해결하는_문제_강의슬라이드_v0.1.html" aria-label="0-1 슬라이드 열기">슬라이드 열기<span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="lesson-row" data-lesson="0-2" aria-labelledby="lesson-0-2-title">
+            <div class="lesson-main">
+              <span class="lesson-no">0-2</span>
+              <div class="lesson-heading">
+                <h3 id="lesson-0-2-title">SignalDesk 완성본 둘러보기</h3>
+                <span class="lesson-meta">11장 · 약 7분</span>
+                <p class="lesson-description">앞으로 완성할 SignalDesk의 목록·검색·상세·분석·운영 흐름과 출시 증거를 살펴봅니다. 현재 자료는 합성 데이터를 사용하는 목표 화면과 개념도이며, 완성된 앱이나 실제 실행 결과를 보여 주는 자료가 아닙니다.</p>
+              </div>
+            </div>
+            <div class="lesson-actions" role="group" aria-label="0-2 강의 자료와 수강 기록">
+              <a class="material-link" data-material="slides" href="materials/2026-09-08_0-2_SignalDesk_완성본_둘러보기_강의슬라이드_v0.1.html" aria-label="0-2 슬라이드 열기">슬라이드 열기<span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="lesson-row" data-lesson="0-3" aria-labelledby="lesson-0-3-title">
+            <div class="lesson-main">
+              <span class="lesson-no">0-3</span>
+              <div class="lesson-heading">
+                <h3 id="lesson-0-3-title">AI가 할 일과 사람이 책임질 일</h3>
+                <span class="lesson-meta">9장 · 약 5분</span>
+                <p class="lesson-description">AI에게 맡길 조사·대안·작은 변경과 사람이 정할 목표·범위·권한·승인의 경계를 구체적인 작업 지시와 거절 사례로 익힙니다. 네 개의 승인 게이트는 이 강의의 작업 운영 규칙입니다.</p>
+              </div>
+            </div>
+            <div class="lesson-actions" role="group" aria-label="0-3 강의 자료와 수강 기록">
+              <a class="material-link" data-material="slides" href="materials/2026-09-08_0-3_AI가_할_일과_사람이_책임질_일_강의슬라이드_v0.1.html" aria-label="0-3 슬라이드 열기">슬라이드 열기<span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="lesson-row" data-lesson="0-4" aria-labelledby="lesson-0-4-title">
+            <div class="lesson-main">
+              <span class="lesson-no">0-4</span>
+              <div class="lesson-heading">
+                <h3 id="lesson-0-4-title">강의 기준 툴과 비용·보안 원칙</h3>
+                <span class="lesson-meta">9장 · 약 7분</span>
+                <p class="lesson-description">Work·Codex·VS Code·GitHub의 역할을 구분하고, 필수·선택 도구표와 파일 접근·비밀·비용의 기준을 작성합니다. 제품 정보는 2026-09-08 공식 문서 확인 기준이며 요금과 제공 범위는 계정에서 다시 확인합니다.</p>
+              </div>
+            </div>
+            <div class="lesson-actions" role="group" aria-label="0-4 강의 자료와 수강 기록">
+              <a class="material-link" data-material="slides" href="materials/2026-09-08_0-4_강의_기준_툴과_비용_보안_원칙_강의슬라이드_v0.1.html" aria-label="0-4 슬라이드 열기">슬라이드 열기<span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="lesson-row" data-lesson="0-5" aria-labelledby="lesson-0-5-title">
+            <div class="lesson-main">
+              <span class="lesson-no">0-5</span>
+              <div class="lesson-heading">
+                <h3 id="lesson-0-5-title">Windows·macOS 개발 환경 설치와 버전 고정</h3>
+                <span class="lesson-meta">14장 · 약 12분</span>
+                <p class="lesson-description">운영체제에 맞게 Git·Node.js LTS·pnpm·VS Code·Docker·브라우저를 준비하고, 새 연습 폴더에서 버전 기록과 PostgreSQL 연결을 확인합니다. 2026-09-08 공식 문서 확인 기준입니다. 12분은 설명·시연 편집 분량이며 다운로드·설치·재부팅 시간은 별도입니다.</p>
+              </div>
+            </div>
+            <div class="lesson-actions" role="group" aria-label="0-5 강의 자료와 수강 기록">
+              <a class="material-link" data-material="slides" href="materials/2026-09-08_0-5_Windows_macOS_개발환경_설치와_버전_고정_강의슬라이드_v0.1.html" aria-label="0-5 슬라이드 열기">슬라이드 열기<span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
+          <article class="lesson-row" data-lesson="0-6" aria-labelledby="lesson-0-6-title">
+            <div class="lesson-main">
+              <span class="lesson-no">0-6</span>
+              <div class="lesson-heading">
+                <h3 id="lesson-0-6-title">Codex 앱·VS Code 연결과 환경 진단</h3>
+                <span class="lesson-meta">12장 · 약 10분</span>
+                <p class="lesson-description">같은 프로젝트와 브랜치를 앱·VS Code에서 확인하고, clone → install → DB → test 순서로 실습 환경을 진단합니다. 강의용 starter와 pnpm doctor 구현·배포를 전제로 한 12장·10분 강의 자료입니다.</p>
+              </div>
+            </div>
+            <div class="lesson-actions" role="group" aria-label="0-6 강의 자료와 수강 기록">
+              <a class="material-link" data-material="slides" href="materials/2026-09-08_0-6_Codex_앱_VS_Code_연결과_환경_진단_강의슬라이드_v0.1.html" aria-label="0-6 슬라이드 열기">슬라이드 열기<span aria-hidden="true">↗</span></a>
+            </div>
+          </article>
         </div>
-        <a class="button" href="materials/2026-09-07_0-1_이_강의가_해결하는_문제_강의슬라이드_v0.1.html">슬라이드 열기</a>
-      </article>
+      </details>
     </section>
+
 
     <section class="resources" aria-labelledby="resources-title">
       <div class="section-head">
         <div class="section-index">02 / MATERIALS</div>
-        <div><h2 id="resources-title">함께 보는 자료</h2><p>강의의 전체 구조와 장면별 설명, 시각 규칙을 확인할 수 있습니다.</p></div>
+        <div><h2 id="resources-title">함께 보는 자료</h2><p>전체 커리큘럼과 강의 자료의 공통 디자인을 확인할 수 있습니다.</p></div>
       </div>
       <div class="resource-list">
         <a class="resource" href="materials/2026-09-07_AI_풀스택_서비스_출시_강의_커리큘럼_v0.2.html">
-          <small>CURRICULUM · v0.2</small><h3>전체 강의 커리큘럼</h3><p>Codex·VS Code 환경설정부터 Orca–Cursor 선택 부록까지 포함한 최신 구성입니다.</p>
-        </a>
-        <a class="resource" href="materials/2026-09-07_0-1_이_강의가_해결하는_문제_스크립트_스토리보드_v0.1.html">
-          <small>STORYBOARD</small><h3>0-1 스크립트·스토리보드</h3><p>전체 내레이션과 타임코드, 장면별 화면 지시를 확인합니다.</p>
+          <small>CURRICULUM · v0.2 · 09.08 수정</small><h3>전체 강의 커리큘럼</h3><p>0-0 오리엔테이션을 추가한 구성입니다. 기존 수업 번호와 실습·부록 범위는 유지합니다.</p>
         </a>
         <a class="resource" href="materials/2026-09-07_AI_풀스택_강의_디자인시스템_v0.1.html">
           <small>DESIGN SYSTEM</small><h3>강의 디자인 시스템</h3><p>색상·타이포·그리드·슬라이드 마스터의 공통 규칙입니다.</p>

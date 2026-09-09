@@ -1,0 +1,5 @@
+# Cooperative crawl restriction; this file must be served at the origin root.
+# A GitHub Pages project subdirectory does NOT provide root robots.txt control.
+# See docs/2026-09-08_섹션00_자료와_수강기록.md in the repository.
+User-agent: *
+Disallow: /

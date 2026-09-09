@@ -1,0 +1,4 @@
+# Local instructor originals. Never force-add or deploy this directory.
+/.private/
+# Legacy instructor-only folder; tracked files are migrated separately.
+/production/

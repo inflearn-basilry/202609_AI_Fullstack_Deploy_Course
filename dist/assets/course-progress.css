@@ -1,0 +1,19 @@
+.progress-check{display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:8px 12px;margin:10px 0 0 14px;border:1px solid #91a3ab;border-radius:8px;color:#10233f;background:#fffdf8;cursor:pointer;font:700 14px/1.4 Pretendard,"Malgun Gothic",sans-serif;vertical-align:middle;white-space:nowrap}
+.progress-check input{width:18px;height:18px;margin:0;accent-color:#227b85;cursor:pointer;flex:0 0 auto}
+.progress-check:has(input:focus-visible){outline:3px solid #227b85;outline-offset:3px}
+.progress-check[data-completed="true"]{border-color:#52781b;background:#eff6dc}
+.lesson-row[data-completed="true"] .lesson-no{color:#3b6817}
+.lessons .progress-check{display:flex;width:max-content;margin:10px 0 0;font-size:12px}
+.course-progress-summary{padding:20px 0;border-bottom:1px solid #d4d8dc;margin-bottom:8px}
+.course-progress-summary .progress-count{font:800 16px/1.5 Pretendard,"Malgun Gothic",sans-serif;color:#10233f}
+.progress-notice{margin:7px 0 0!important;color:#526077!important;font:13px/1.65 Pretendard,"Malgun Gothic",sans-serif!important;max-width:800px}
+.progress-notice[data-warning="true"]{color:#9b422f!important}
+.lesson-progress{margin-top:35px;padding:18px;border:1px solid #91a3ab;border-radius:10px}
+.lesson-progress .progress-check{margin:0}
+.lesson-progress.floating{position:fixed;top:10px;left:10px;z-index:21;margin:0;padding:0;border:0;background:transparent;max-width:280px}
+.lesson-progress.floating .progress-check{min-height:34px;padding:6px 9px;background:#0a172b;color:#f6f2e9;font-size:12px;border-color:#61738a}
+.lesson-progress.floating .progress-check[data-completed="true"]{background:#eff6dc;color:#10233f}
+.lesson-progress.floating .progress-notice{position:absolute;top:100%;left:0;padding:8px;border-radius:6px;background:#f6f2e9;width:270px;display:none}
+.lesson-progress.floating:hover .progress-notice,.lesson-progress.floating:focus-within .progress-notice{display:block}
+@media(max-width:520px){.course-progress-summary{padding:17px 0}.progress-notice{font-size:12px!important}}
+@media print{.progress-check,.course-progress-summary,.lesson-progress{display:none!important}}

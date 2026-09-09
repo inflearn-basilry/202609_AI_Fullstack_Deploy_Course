@@ -1,6 +1,10 @@
 <!doctype html>
 <html lang="ko">
 <head>
+  <meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <meta name="googlebot" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+  <link rel="stylesheet" href="../assets/course-progress.css">
+  <script src="../assets/course-progress.js" defer></script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="0-1. 이 강의가 해결하는 문제 — 16:9 HTML 강의 슬라이드">
@@ -735,7 +739,7 @@
     }
   </style>
 </head>
-<body>
+<body data-lesson-page="0-1">
   <div class="progress" aria-hidden="true"></div>
 
   <main class="deck-stage" id="deck" aria-label="0-1. 이 강의가 해결하는 문제">
@@ -758,7 +762,6 @@
         </div>
       </div>
       <span class="page-no">01 / 08</span>
-      <aside class="speaker-notes" data-direction="첫 문장은 카메라 정면. ‘그런데’에서 0.5초 멈춘 뒤 미완성 프로젝트 폴더 화면으로 컷.">AI에게 기능을 부탁했더니 몇 분 만에 코드가 나옵니다. 화면도 열리고, 버튼도 한 번은 동작합니다. 그런데 일주일 뒤 그 프로젝트는 어디에 있나요? 배포되지 않은 저장소, 깨진 테스트, 설명하기 어려운 코드로 남아 있지는 않나요?</aside>
     </section>
 
     <section class="slide blame" data-title="개인의 의지 문제가 아니다" aria-label="2장. 개인의 의지 문제가 아니다">
@@ -773,7 +776,6 @@
         <p class="decision-line reveal d4">출시까지는 코드보다 <b>여러 번의 결정</b>이 필요합니다.</p>
       </div>
       <span class="page-no">02 / 08</span>
-      <aside class="speaker-notes" data-direction="‘의지가 부족해서도’와 ‘프롬프트를 못 써서도’에 작은 X 그래픽. 마지막 문장은 네 개의 결정 카드가 하나씩 등장.">이건 여러분이 의지가 부족해서도, 프롬프트를 못 써서도 아닙니다. 코드 한 조각을 만드는 일과 서비스를 끝까지 출시하는 일 사이에는 생각보다 많은 결정이 있기 때문입니다. 무엇을 만들지 줄여야 하고, 데이터와 API의 약속을 정해야 하고, 결과가 맞는지 검증해야 하고, 실패했을 때 다시 살릴 방법도 준비해야 합니다.</aside>
     </section>
 
     <section class="slide contrast" data-title="코드 생성 완료와 서비스 출시 완료" aria-label="3장. 코드 생성 완료와 서비스 출시 완료">
@@ -793,7 +795,6 @@
         </div>
       </div>
       <span class="page-no">03 / 08</span>
-      <aside class="speaker-notes" data-direction="화면을 세로로 나눠 왼쪽에는 ‘코드 생성 완료’, 오른쪽에는 ‘서비스 출시 완료’. 우측에만 테스트·URL·로그·런북 배지 표시.">AI는 빈 화면을 코드로 채우는 데 아주 강합니다. 하지만 ‘그럴듯한 코드가 생겼다’를 ‘출시할 수 있다’로 판정해 주지는 않습니다. 브라우저에서 한 번 보였다는 것과, 다른 환경에서도 반복해서 작동한다는 것은 다릅니다. 기능이 있다는 것과, 실제 사용자가 실패 없이 목적을 달성한다는 것도 다릅니다.</aside>
     </section>
 
     <section class="slide gaps" data-title="프로젝트를 멈추게 하는 네 가지 간극" aria-label="4장. 프로젝트를 멈추게 하는 네 가지 간극">
@@ -809,7 +810,6 @@
         </div>
       </div>
       <span class="page-no">04 / 08</span>
-      <aside class="speaker-notes" data-direction="범위 → 컨텍스트 → 검증 → 운영 순으로 4분할 카드를 확대. 각 항목의 굵은 단어는 화면 자막과 정확히 일치시킨다.">대부분의 미완성 프로젝트는 네 군데에서 멈춥니다. 첫째, 범위의 간극입니다. 아이디어는 큰데 이번 주에 끝낼 핵심 행동이 없습니다. 둘째, 컨텍스트의 간극입니다. AI가 프로젝트 규칙과 이전 결정을 모르니 매번 다른 방향으로 코드를 바꿉니다. 셋째, 검증의 간극입니다. 실행 화면만 보고 넘어가서 데이터 오류와 회귀를 늦게 발견합니다. 넷째, 운영의 간극입니다. 로컬에서는 되지만 배포, 로그, 복구 방법이 없습니다.</aside>
     </section>
 
     <section class="slide process" data-title="AI를 팀처럼 쓰는 반복 루프" aria-label="5장. AI를 팀처럼 쓰는 반복 루프">
@@ -829,7 +829,6 @@
         <div class="approval-line reveal d6">AI는 제안하고, 사람은 승인한다</div>
       </div>
       <span class="page-no">05 / 08</span>
-      <aside class="speaker-notes" data-direction="원형 루프 애니메이션. ‘사람의 결정’은 라임색, ‘AI의 제안’은 청록색, ‘자동 검증’은 흰색으로 일관되게 사용.">그래서 이 강의에서는 좋은 프롬프트 몇 개를 외우지 않습니다. 사람이 목표와 제약, 완료 조건을 정합니다. AI는 그 범위 안에서 조사하고 작은 변경을 제안합니다. 우리는 diff와 근거를 확인하고, 자동 테스트와 실제 실행 결과로 승인하거나 거절합니다. 그리고 결정과 실패를 저장해 다음 작업의 컨텍스트로 넘깁니다. 이 짧은 루프를 기획부터 배포까지 계속 반복할 겁니다.</aside>
     </section>
 
     <section class="slide signal" data-title="SignalDesk와 출시 증거" aria-label="6장. SignalDesk와 출시 증거">
@@ -853,7 +852,6 @@
         </div>
       </div>
       <span class="page-no">06 / 08</span>
-      <aside class="speaker-notes" data-direction="SignalDesk 흐름을 왼쪽에서 오른쪽으로 연결. 마지막 문장에서는 테스트·URL·실행 이력·런북이 제품 화면 주변에 증거 카드로 붙는다.">우리는 이 방식으로 ‘SignalDesk’라는 작은 풀스택 서비스를 만듭니다. 이벤트를 수집하고 정규화해 저장한 뒤, AI가 구조화된 브리핑을 만들고, 사용자는 목록과 상세 화면에서 결과를 확인합니다. 하지만 진짜 결과물은 화면만이 아닙니다. 자동 테스트, 공개 URL, AI 실행 이력, 그리고 장애가 났을 때 따라 할 운영 런북까지 남깁니다.</aside>
     </section>
 
     <section class="slide reflection" data-title="내 프로젝트는 어디에서 멈췄나" aria-label="7장. 내 프로젝트는 어디에서 멈췄나">
@@ -867,7 +865,6 @@
       </div>
       <p class="pause-note mono">PAUSE · 프로젝트와 정지 지점을 한 줄로 적어보세요</p>
       <span class="page-no">07 / 08</span>
-      <aside class="speaker-notes" data-direction="워크북 문장을 전체 화면에 표시하고 3초 침묵. 네 항목 중 하나에 체크하는 예시를 짧게 보여 준다.">다음 수업으로 가기 전에 30초만 써 보겠습니다. 최근에 끝내지 못한 프로젝트 하나를 떠올려 주세요. 그리고 이렇게 적어 보세요. ‘내 프로젝트는 어디에서 멈췄고, 그때 무엇이 없었는가?’ 기능을 계속 추가하다 멈췄다면 범위, AI가 코드를 계속 뒤집었다면 컨텍스트, 고칠수록 다른 곳이 깨졌다면 검증, 로컬 다음으로 못 갔다면 운영에 표시하면 됩니다.</aside>
     </section>
 
     <section class="slide next" data-title="다음 수업: SignalDesk 완성본" aria-label="8장. 다음 수업 SignalDesk 완성본">
@@ -884,21 +881,13 @@
         <div class="proof-card reveal d5"><b>04 / RUNBOOK</b><span>복구 가능한 운영</span><i></i></div>
       </div>
       <span class="page-no">08 / 08</span>
-      <aside class="speaker-notes" data-direction="강사 A-roll에서 SignalDesk 완성 화면으로 매치 컷. 0-2 수업 제목 카드가 올라오며 종료.">이제 우리가 목표로 삼을 ‘완성’이 어떤 모습인지 먼저 확인하겠습니다. 다음 수업에서는 SignalDesk의 화면보다, 그 뒤에 함께 남은 출시 증거를 중심으로 완성본을 둘러보겠습니다.</aside>
     </section>
   </main>
-
-  <aside class="notes-panel" id="notesPanel" aria-live="polite" hidden>
-    <h3 id="notesTitle">발표자 노트</h3>
-    <p id="notesText"></p>
-    <p id="notesDirection"></p>
-  </aside>
 
   <div class="controls" id="controls" aria-label="슬라이드 컨트롤">
     <button type="button" id="prev" aria-label="이전 슬라이드">←</button>
     <span class="counter" id="counter">01 / 08</span>
     <button type="button" id="next" aria-label="다음 슬라이드">→</button>
-    <button type="button" id="notes" aria-label="발표자 노트 열기" title="발표자 노트 (N)">N</button>
     <button type="button" id="fullscreen" aria-label="전체 화면" title="전체 화면 (F)">F</button>
     <button type="button" id="hideUi" aria-label="컨트롤 숨기기" title="컨트롤 숨기기 (H)">H</button>
   </div>
@@ -911,10 +900,6 @@
       const progress = document.querySelector('.progress');
       const counter = document.getElementById('counter');
       const controls = document.getElementById('controls');
-      const notesPanel = document.getElementById('notesPanel');
-      const notesTitle = document.getElementById('notesTitle');
-      const notesText = document.getElementById('notesText');
-      const notesDirection = document.getElementById('notesDirection');
       const helpToast = document.getElementById('helpToast');
       let current = 0;
 
@@ -925,12 +910,6 @@
         document.documentElement.style.setProperty('--deck-scale', scale);
       }
 
-      function updateNotes() {
-        const source = slides[current].querySelector('.speaker-notes');
-        notesTitle.textContent = `${pad(current + 1)} · ${slides[current].dataset.title}`;
-        notesText.textContent = source?.textContent.trim() || '';
-        notesDirection.textContent = source?.dataset.direction ? `화면 지시: ${source.dataset.direction}` : '';
-      }
 
       function showSlide(index, pushHash = true) {
         const nextIndex = Math.max(0, Math.min(slides.length - 1, index));
@@ -943,17 +922,12 @@
         current = nextIndex;
         counter.textContent = `${pad(current + 1)} / ${pad(slides.length)}`;
         progress.style.setProperty('--progress', `${((current + 1) / slides.length) * 100}%`);
-        updateNotes();
         document.title = `${pad(current + 1)} · ${slides[current].dataset.title}`;
         if (pushHash) history.replaceState(null, '', `#${current + 1}`);
       }
 
       function step(delta) { showSlide(current + delta); }
 
-      function toggleNotes() {
-        notesPanel.hidden = !notesPanel.hidden;
-        document.getElementById('notes').setAttribute('aria-label', notesPanel.hidden ? '발표자 노트 열기' : '발표자 노트 닫기');
-      }
 
       function toggleFullscreen() {
         if (!document.fullscreenElement) document.documentElement.requestFullscreen?.();
@@ -964,7 +938,6 @@
 
       document.getElementById('prev').addEventListener('click', () => step(-1));
       document.getElementById('next').addEventListener('click', () => step(1));
-      document.getElementById('notes').addEventListener('click', toggleNotes);
       document.getElementById('fullscreen').addEventListener('click', toggleFullscreen);
       document.getElementById('hideUi').addEventListener('click', toggleUi);
 
@@ -974,10 +947,8 @@
         if (['ArrowLeft', 'PageUp', 'Backspace'].includes(event.key)) { event.preventDefault(); step(-1); }
         if (event.key === 'Home') { event.preventDefault(); showSlide(0); }
         if (event.key === 'End') { event.preventDefault(); showSlide(slides.length - 1); }
-        if (event.key.toLowerCase() === 'n') toggleNotes();
         if (event.key.toLowerCase() === 'f') toggleFullscreen();
         if (event.key.toLowerCase() === 'h') toggleUi();
-        if (event.key === 'Escape' && !notesPanel.hidden) notesPanel.hidden = true;
       });
 
       let touchStartX = 0;
