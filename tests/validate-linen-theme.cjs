@@ -133,6 +133,8 @@ check('one shared theme on every public HTML page', () => {
   assert(/--course-font-sans\s*:[^;]*Pretendard/i.test(theme), 'Shared sans stack must name Pretendard');
   assert(/--course-font-code\s*:/i.test(theme), 'Shared code font token missing');
   assert(/--course-font-code\s*:\s*['"]D2Coding['"]\s*,\s*monospace\s*;/i.test(theme), 'Code font must use D2Coding');
+  assert(/(?:^|\})\s*code\s*,\s*pre\s*\{\s*font-family\s*:\s*var\(--course-font-code\)\s*;\s*\}/i.test(theme), 'Code tags must explicitly use the shared D2Coding font, not the browser default');
+  assert(/(?:^|\})\s*code\s+\*\s*\{\s*font-family\s*:\s*inherit\s*;\s*\}/i.test(theme), 'Nested code text must inherit the code font');
   const d2Faces = [...theme.matchAll(/@font-face\s*\{([^}]+)\}/gi)]
     .map(match => match[1]).filter(face => /font-family\s*:\s*['"]D2Coding['"]/i.test(face));
   for (const weight of [400, 700]) {

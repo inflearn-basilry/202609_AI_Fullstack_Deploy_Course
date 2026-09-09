@@ -54,6 +54,9 @@
 }
 html { background: var(--course-canvas); }
 body { font-family: var(--course-font-sans); color: var(--course-ink); }
+/* Set code itself: the browser's default monospace rule overrides inheritance from pre. */
+code, pre { font-family: var(--course-font-code); }
+code * { font-family: inherit; }
 button, input, select, textarea { font: inherit; }
 :focus-visible { outline: 3px solid var(--course-action); outline-offset: 3px; }
 ::selection { background: var(--course-action-soft); color: var(--course-ink); }
