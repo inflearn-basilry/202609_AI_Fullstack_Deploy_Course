@@ -74,7 +74,7 @@
       addControl(lesson.querySelector('.lesson-actions'), lesson.dataset.lesson);
     });
     document.querySelectorAll('.lessons tr[data-lesson]').forEach(row => addControl(row.querySelector('td'), row.dataset.lesson));
-    document.querySelectorAll('.catalog-section').forEach(section => {
+    document.querySelectorAll('.chapter').forEach(section => {
       addSummary(section.querySelector('.chapter-body'), [...section.querySelectorAll('.lesson-row[data-lesson]')].map(node => node.dataset.lesson), true);
     });
     const curriculum = document.getElementById('curriculum-list');

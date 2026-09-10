@@ -30,6 +30,8 @@ jobs:
 
       - name: Validate public materials before deployment
         run: |
+          node tests/validate-section01.cjs
+          node tests/validate-player.cjs
           node tests/validate-orientation.cjs
           node tests/validate-section00.cjs
           node tests/validate-public-boundary.cjs

@@ -1,44 +1,45 @@
-/* Linen Blue section layouts. Compact existing multi-column content is preserved. */
-.section00 h2{font-size:72px}
-.section00 .lead{font-size:36px}
-.section00 .takeaway{font-size:28px;margin-top:28px;padding-top:24px}
-.section00 .project-grid{margin-top:32px;gap:32px}
-.section00 .project-grid h3{font-size:38px;margin:20px 0}
-.section00 .project-grid p{font-size:28px;min-height:100px;line-height:1.55}
-.section00 .project-grid b{font-size:26px;margin-top:20px}
-.section00 .translation{margin-top:32px;gap:32px}
-.section00 .translation article{padding:28px 32px}
-.section00 .translation h3{font-size:40px;line-height:1.3;margin-top:16px}
-.section00 .translation p{font-size:28px;line-height:1.55}
-.section00 .check-grid{margin-top:32px;gap:16px 40px}
-.section00 .check-grid p{padding:24px 0;font-size:30px;line-height:1.55}
-.section00 .paper .check-grid b{color:var(--course-action)}
-.section00 .paper em{color:var(--course-action)}
-.section00 .route{margin-top:32px}
-.section00 .route h3{font-size:44px;margin:20px 0}
-.section00 .route p{font-size:28px}
-.section00 .navy .route article{border-top-color:var(--course-line)}
-.section00 .code-example{margin:32px 0 0;padding:24px 32px;border:1px solid var(--course-line);border-left:3px solid var(--course-action);border-radius:8px;background:var(--course-inset);color:var(--course-ink);font:450 30px/1.55 var(--course-font-code);letter-spacing:0;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal}
-.section00 .paper .code-example{background:var(--course-inset);color:var(--course-ink);border-left-color:var(--course-action)}
-.section00 .lesson-table{width:100%;border-collapse:collapse;margin-top:32px;font-size:28px;line-height:1.5;table-layout:fixed}
-.section00 .lesson-table th,.section00 .lesson-table td{text-align:left;padding:16px 24px;border-bottom:1px solid var(--course-line);vertical-align:top;overflow-wrap:anywhere}
-.section00 .lesson-table th{color:var(--course-ink);font-size:24px;font-weight:650}
-.section00 .paper .lesson-table th{color:var(--course-ink)}
-.section00 .lesson-table th:first-child{width:39%}
-.section00 .footnote{font-size:24px;margin-top:20px}
-.section00 .fine{font-size:24px;line-height:1.5}
-.section00 .pipeline{margin-top:32px}
-.section00 .pipeline h3{font-size:36px}
-.section00 .pipeline p{font-size:28px}
+/* Shared Linen Blue lesson layouts. The legacy .section00 class stays compatible;
+   new sections use .lesson-deck. Do not copy this stylesheet for each section. */
+:is(.section00,.lesson-deck) h2{font-size:72px}
+:is(.section00,.lesson-deck) .lead{font-size:36px}
+:is(.section00,.lesson-deck) .takeaway{font-size:28px;margin-top:28px;padding-top:24px}
+:is(.section00,.lesson-deck) .project-grid{margin-top:32px;gap:32px}
+:is(.section00,.lesson-deck) .project-grid h3{font-size:38px;margin:20px 0}
+:is(.section00,.lesson-deck) .project-grid p{font-size:28px;min-height:100px;line-height:1.55}
+:is(.section00,.lesson-deck) .project-grid b{font-size:26px;margin-top:20px}
+:is(.section00,.lesson-deck) .translation{margin-top:32px;gap:32px}
+:is(.section00,.lesson-deck) .translation article{padding:28px 32px}
+:is(.section00,.lesson-deck) .translation h3{font-size:40px;line-height:1.3;margin-top:16px}
+:is(.section00,.lesson-deck) .translation p{font-size:28px;line-height:1.55}
+:is(.section00,.lesson-deck) .check-grid{margin-top:32px;gap:16px 40px}
+:is(.section00,.lesson-deck) .check-grid p{padding:24px 0;font-size:30px;line-height:1.55}
+:is(.section00,.lesson-deck) .paper .check-grid b{color:var(--course-action)}
+:is(.section00,.lesson-deck) .paper em{color:var(--course-action)}
+:is(.section00,.lesson-deck) .route{margin-top:32px}
+:is(.section00,.lesson-deck) .route h3{font-size:44px;margin:20px 0}
+:is(.section00,.lesson-deck) .route p{font-size:28px}
+:is(.section00,.lesson-deck) .navy .route article{border-top-color:var(--course-line)}
+:is(.section00,.lesson-deck) .code-example{margin:32px 0 0;padding:24px 32px;border:1px solid var(--course-line);border-left:3px solid var(--course-action);border-radius:8px;background:var(--course-inset);color:var(--course-ink);font:450 30px/1.55 var(--course-font-code);letter-spacing:0;white-space:pre-wrap;overflow-wrap:anywhere;word-break:normal}
+:is(.section00,.lesson-deck) .paper .code-example{background:var(--course-inset);color:var(--course-ink);border-left-color:var(--course-action)}
+:is(.section00,.lesson-deck) .lesson-table{width:100%;border-collapse:collapse;margin-top:32px;font-size:28px;line-height:1.5;table-layout:fixed}
+:is(.section00,.lesson-deck) .lesson-table th,:is(.section00,.lesson-deck) .lesson-table td{text-align:left;padding:16px 24px;border-bottom:1px solid var(--course-line);vertical-align:top;overflow-wrap:anywhere}
+:is(.section00,.lesson-deck) .lesson-table th{color:var(--course-ink);font-size:24px;font-weight:650}
+:is(.section00,.lesson-deck) .paper .lesson-table th{color:var(--course-ink)}
+:is(.section00,.lesson-deck) .lesson-table th:first-child{width:39%}
+:is(.section00,.lesson-deck) .footnote{font-size:24px;margin-top:20px}
+:is(.section00,.lesson-deck) .fine{font-size:24px;line-height:1.5}
+:is(.section00,.lesson-deck) .pipeline{margin-top:32px}
+:is(.section00,.lesson-deck) .pipeline h3{font-size:36px}
+:is(.section00,.lesson-deck) .pipeline p{font-size:28px}
 /* Existing dense / mixed slides are explicit fit exceptions, not global body sizes. */
-.section00 .dense-code .code-example{font-size:24px;line-height:1.4;padding:24px 32px;margin-top:24px}
-.section00 .dense-code h2{font-size:72px}
-.section00 .mixed-content .code-example{font-size:24px;line-height:1.45;padding:20px 28px;margin-top:24px}
-.section00 .mixed-content .lesson-table{font-size:25px;margin-top:20px}
-.section00 .mixed-content .lesson-table th,.section00 .mixed-content .lesson-table td{padding:12px 20px}
+:is(.section00,.lesson-deck) .dense-code .code-example{font-size:24px;line-height:1.4;padding:24px 32px;margin-top:24px}
+:is(.section00,.lesson-deck) .dense-code h2{font-size:72px}
+:is(.section00,.lesson-deck) .mixed-content .code-example{font-size:24px;line-height:1.45;padding:20px 28px;margin-top:24px}
+:is(.section00,.lesson-deck) .mixed-content .lesson-table{font-size:25px;margin-top:20px}
+:is(.section00,.lesson-deck) .mixed-content .lesson-table th,:is(.section00,.lesson-deck) .mixed-content .lesson-table td{padding:12px 20px}
 @media screen and (max-width:760px){
-html:not(.presentation-mode):not(:fullscreen) .section00 .code-example{font-size:16px;line-height:1.6;padding:16px;margin-top:24px;max-width:100%;white-space:pre-wrap;overflow-wrap:anywhere}
-html:not(.presentation-mode):not(:fullscreen) .section00 .lesson-table{font-size:16px;line-height:1.6;margin-top:24px}
-html:not(.presentation-mode):not(:fullscreen) .section00 .lesson-table th,html:not(.presentation-mode):not(:fullscreen) .section00 .lesson-table td{font-size:16px;padding:12px 8px;overflow-wrap:anywhere;word-break:normal}
-html:not(.presentation-mode):not(:fullscreen) .section00 .translation .highlight h3{font-size:28px}
+html:not(.presentation-mode):not(:fullscreen) :is(.section00,.lesson-deck) .code-example{font-size:16px;line-height:1.6;padding:16px;margin-top:24px;max-width:100%;white-space:pre-wrap;overflow-wrap:anywhere}
+html:not(.presentation-mode):not(:fullscreen) :is(.section00,.lesson-deck) .lesson-table{font-size:16px;line-height:1.6;margin-top:24px}
+html:not(.presentation-mode):not(:fullscreen) :is(.section00,.lesson-deck) .lesson-table th,html:not(.presentation-mode):not(:fullscreen) :is(.section00,.lesson-deck) .lesson-table td{font-size:16px;padding:12px 8px;overflow-wrap:anywhere;word-break:normal}
+html:not(.presentation-mode):not(:fullscreen) :is(.section00,.lesson-deck) .translation .highlight h3{font-size:28px}
 }

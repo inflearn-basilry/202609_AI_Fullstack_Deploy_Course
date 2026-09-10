@@ -21,7 +21,7 @@ for (const file of files) {
   for (const match of source.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
     assert(!forbiddenPath.test(decodeURIComponent(match[1])), file + ' private link');
   }
-  if (/^(orientation-v0\.1|lesson-0-[2-6]-v0\.1)\.js$/.test(path.basename(file))) {
+  if (/^(orientation-v0\.1|lesson-(?:0-[2-6]|1-[1-4])-v0\.1)\.js$/.test(path.basename(file))) {
     const scope = {window:{}};
     vm.runInNewContext(source,scope);
     const data = scope.window.ORIENTATION;
@@ -30,7 +30,7 @@ for (const file of files) {
     datasets++;
   }
 }
-assert.equal(datasets,6);
+assert.equal(datasets,10);
 const tracked = cp.execFileSync('git',['-c','core.quotepath=false','ls-files','-z'],{cwd:root,encoding:'utf8'}).split('\0').filter(Boolean);
 assert(tracked.every(p=>!forbiddenPath.test(p) && !p.includes('오리엔테이션_제작메모')), 'Private files are tracked by Git');
 const ignored = cp.execFileSync('git',['check-ignore','--no-index','.private/instructor/probe.txt','production/probe.txt'],{cwd:root,encoding:'utf8'}).trim().split(/\r?\n/);
@@ -38,4 +38,4 @@ assert.deepEqual(ignored, ['.private/instructor/probe.txt', 'production/probe.tx
 const workflow = fs.readFileSync(path.join(root,'.github/workflows/deploy-pages.yml'),'utf8');
 assert(workflow.includes('path: ./dist'));
 assert(workflow.includes('node tests/validate-public-boundary.cjs'));
-console.log(`PASS: ${files.length} public files; 6 allowlisted slide datasets; no instructor pages, notes, private links or tracked originals.`);
+console.log(`PASS: ${files.length} public files; 10 allowlisted slide datasets; no instructor pages, notes, private links or tracked originals.`);

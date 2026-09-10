@@ -12,9 +12,10 @@
   <title>0-1. 이 강의가 해결하는 문제 — 강의 슬라이드 v0.1</title>
   <link rel="stylesheet" href="lesson-0-1.css">
 <meta name="theme-color" content="#ebe8e0">
+  <link rel="stylesheet" href="../assets/course-player.css">
+  <script src="../assets/course-player.js" defer></script>
 </head>
 <body data-lesson-page="0-1">
-  <div class="progress" aria-hidden="true"></div>
 
   <main class="deck-stage" id="deck" aria-label="0-1. 이 강의가 해결하는 문제">
     <section class="slide opener active" data-title="코드 작성 후에 필요한 출시 작업" aria-label="1장. 코드 작성 후에 필요한 출시 작업">
@@ -158,110 +159,7 @@
     </section>
   </main>
 
-  <div class="controls" id="controls" aria-label="슬라이드 컨트롤">
-    <button type="button" id="prev" aria-label="이전 슬라이드">←</button>
-    <span class="counter" id="counter">01 / 08</span>
-    <button type="button" id="next" aria-label="다음 슬라이드">→</button>
-    <button type="button" id="fullscreen" aria-label="전체 화면" title="전체 화면 (F)">F</button>
-    <button type="button" id="hideUi" aria-label="컨트롤 숨기기" title="컨트롤 숨기기 (H)">H</button>
-  </div>
-
-  <div class="help-toast" id="helpToast">← → 이동 · F 전체화면 · H 컨트롤</div>
-
-  <script>
-    (() => {
-      const slides = [...document.querySelectorAll('.slide')];
-      const progress = document.querySelector('.progress');
-      const counter = document.getElementById('counter');
-      const controls = document.getElementById('controls');
-      const helpToast = document.getElementById('helpToast');
-      let current = 0;
-
-      const pad = value => String(value).padStart(2, '0');
-
-      function fitDeck() {
-        const presenting = !!document.fullscreenElement;
-        document.documentElement.classList.toggle('presentation-mode', presenting);
-        const scale = window.innerWidth <= 760 && !presenting ? 1 : Math.min(window.innerWidth / 1920, Math.max(100, window.innerHeight - 80) / 1080);
-        document.documentElement.style.setProperty('--deck-scale', scale);
-      }
 
 
-      function showSlide(index, pushHash = true) {
-        const nextIndex = Math.max(0, Math.min(slides.length - 1, index));
-        const direction = nextIndex < current ? 'back' : 'forward';
-        slides.forEach((slide, i) => {
-          slide.classList.toggle('active', i === nextIndex);
-          slide.dataset.direction = direction;
-          slide.setAttribute('aria-hidden', i === nextIndex ? 'false' : 'true');
-          slide.inert = i !== nextIndex;
-        });
-        current = nextIndex;
-        counter.textContent = `${pad(current + 1)} / ${pad(slides.length)}`;
-        document.getElementById('prev').disabled = current === 0;
-        document.getElementById('next').disabled = current === slides.length - 1;
-        progress.style.setProperty('--progress', `${((current + 1) / slides.length) * 100}%`);
-        document.title = `${pad(current + 1)} · ${slides[current].dataset.title}`;
-        if (pushHash) history.replaceState(null, '', `#${current + 1}`);
-        if (pushHash && window.innerWidth <= 760 && !document.fullscreenElement) window.scrollTo(0, 0);
-      }
-
-      function step(delta) { showSlide(current + delta); }
-
-
-      async function toggleFullscreen() {
-        try {
-          if (!document.fullscreenElement && document.documentElement.requestFullscreen) await document.documentElement.requestFullscreen();
-          else if (document.fullscreenElement) await document.exitFullscreen();
-        } catch (_) { /* Keep the fitted reading view when fullscreen is unavailable. */ }
-      }
-
-      function toggleUi() {
-        const hidden = controls.classList.toggle('is-hidden');
-        const toggle = document.getElementById('hideUi');
-        toggle.setAttribute('aria-label', hidden ? '컨트롤 표시하기' : '컨트롤 숨기기');
-        toggle.title = hidden ? '컨트롤 표시하기 (H)' : '컨트롤 숨기기 (H)';
-      }
-
-      document.getElementById('prev').addEventListener('click', () => step(-1));
-      document.getElementById('next').addEventListener('click', () => step(1));
-      document.getElementById('fullscreen').addEventListener('click', toggleFullscreen);
-      document.getElementById('hideUi').addEventListener('click', toggleUi);
-
-      document.addEventListener('keydown', event => {
-        if (event.ctrlKey || event.altKey || event.metaKey || event.target.closest('input,textarea,select,[contenteditable="true"]')) return;
-        if (['ArrowRight', 'PageDown'].includes(event.key)) { event.preventDefault(); step(1); }
-        if ([' ', 'Enter'].includes(event.key) && !event.target.closest('button,a')) { event.preventDefault(); step(1); }
-        if (['ArrowLeft', 'PageUp', 'Backspace'].includes(event.key)) { event.preventDefault(); step(-1); }
-        if (event.key === 'Home') { event.preventDefault(); showSlide(0); }
-        if (event.key === 'End') { event.preventDefault(); showSlide(slides.length - 1); }
-        if (event.key.toLowerCase() === 'f') toggleFullscreen();
-        if (event.key.toLowerCase() === 'h') toggleUi();
-      });
-
-      let touchStart = null;
-      const deck = document.getElementById('deck');
-      deck.addEventListener('touchstart', event => { touchStart = [event.changedTouches[0].screenX, event.changedTouches[0].screenY]; }, { passive: true });
-      deck.addEventListener('touchend', event => {
-        if (!touchStart || event.target.closest('a,button,input')) return;
-        const delta = event.changedTouches[0].screenX - touchStart[0];
-        const vertical = event.changedTouches[0].screenY - touchStart[1];
-        if (Math.abs(delta) > 60 && Math.abs(delta) > Math.abs(vertical)) step(delta < 0 ? 1 : -1);
-        touchStart = null;
-      }, { passive: true });
-
-      window.addEventListener('resize', fitDeck);
-      document.addEventListener('fullscreenchange', fitDeck);
-      window.addEventListener('hashchange', () => {
-        const index = Number(location.hash.slice(1)) - 1;
-        if (Number.isInteger(index)) showSlide(index, false);
-      });
-
-      const initial = Number(location.hash.slice(1)) - 1;
-      fitDeck();
-      showSlide(Number.isInteger(initial) ? initial : 0, false);
-      setTimeout(() => helpToast.classList.add('fade'), 4500);
-    })();
-  </script>
 </body>
 </html>

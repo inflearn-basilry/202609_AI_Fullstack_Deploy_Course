@@ -5,7 +5,7 @@
 ## 학생용 사이트
 
 - GitHub Pages: https://inflearn-basilry.github.io/202609_AI_Fullstack_Deploy_Course/
-- main에 푸시하면 네 가지 검사 후 dist/만 배포합니다.
+- main에 푸시하면 여섯 가지 검사 후 dist/만 배포합니다.
 - 공개 자료는 슬라이드·커리큘럼·디자인 시스템이며 스크립트·발표자 노트는 제외합니다.
 
 ## 파일과 원본 관리
@@ -25,15 +25,25 @@
 
 ## 현재 슬라이드
 
-학생용 자료실·커리큘럼·디자인 가이드·전체 75장에 Linen Blue v1을 적용했습니다. 공통 색상은 dist/assets/course-theme.css, Pretendard Variable은 로컬 WOFF2와 OFL 라이선스로 제공합니다. 작은 화면에서는 슬라이드를 세로로 읽고, 데스크톱과 전체화면에서는 16:9 구성을 유지합니다.
+학생용 자료실·커리큘럼·디자인 가이드·전체 슬라이드에 Linen Blue v1을 적용했습니다. 공통 색상은 dist/assets/course-theme.css, Pretendard Variable은 로컬 WOFF2와 OFL 라이선스로 제공합니다. 작은 화면에서는 슬라이드를 세로로 읽고, 데스크톱과 전체화면에서는 16:9 구성을 유지합니다.
 
 코드·번호·영문 라벨은 D2Coding을 사용합니다. 일반/굵은 WOFF2 원본은 [네이버 공식 저장소](https://github.com/naver/d2-coding-font/tree/9d6f0559691ebe670a23fbf7b72a8dc42362f1fb/site/fonts)에서 가져왔으며 글꼴을 수정하지 않았습니다. dist/assets/fonts/D2Coding-OFL.txt에 라이선스를 함께 제공합니다. 제목·본문 Pretendard와 기존 텍스트는 유지합니다.
 
 제작된 0-0~0-6은 v0.2 편성 기준의 7개 강의·75장·목표 편집 분량 56분입니다. v0.4 커리큘럼과 수업 구성·시간이 다르며 재편집은 별도 작업입니다. 0-2는 목표 화면·합성 예시이고 0-6의 starter·doctor는 구현·배포가 필요한 실습 계약입니다.
 
-방향키 이동과 F 전체화면, 제목 우측의 슬라이드 열기·수강 완료를 유지합니다. 스크립트 버튼과 N 발표자 노트 기능은 공개 화면에서 제거했습니다.
+섹션 00·01의 11개 강의 모두 dist/assets/course-player.js와 course-player.css를 사용합니다. 이 공통 플레이어가 홈·이전/다음·장 번호·전체화면·패널 숨김, 키보드·터치 이동, 주소 해시, 화면 크기 조정, 진행 표시와 접근성 상태를 관리합니다. 개별 HTML에는 조작 패널이나 이벤트 코드를 복사하지 않습니다. 기존 HTML형 0-1과 데이터형 강의는 같은 플레이어에 본문만 제공합니다.
+
+방향키 이동·F 전체화면·H 패널 숨김을 지원합니다. Home/End 키는 첫/마지막 장으로 이동하며, 자료실로 돌아가려면 하단 홈 버튼을 누릅니다. 제목 우측의 슬라이드 열기·수강 완료를 유지합니다. 스크립트 버튼과 N 발표자 노트 기능은 공개 화면에서 제거했습니다.
 
 수강 완료는 기존 강의 번호별 localStorage 키를 유지하며 같은 브라우저·출처의 자료실과 슬라이드에서 공유합니다. 로그인이나 기기 간 동기화는 아닙니다.
+
+## 섹션 01 자료
+
+v0.4 기준 1-1~1-4, 4강·40장·35분입니다. 사용자 행동과 문제 문장, AI 대안 검토·가정표, MVP 범위, 완료 조건이 있는 PRD를 순서대로 작성합니다. [실습 양식과 작성 예시](dist/materials/section01-prd-workbook.md)를 함께 제공합니다. 예시 사용자와 공지는 학습용 가정·합성 데이터이며 실제 사용자 검증이나 앱 실행 결과가 아닙니다.
+
+섹션 00은 기존 v0.2의 7강·56분을 유지했습니다. 최신 v0.4의 6강·42분과 다른 부분은 [편성 대조](docs/2026-09-10_섹션00_편성대조.md)에 정리했습니다. 기존 번호나 완료 기록을 새 편성으로 자동 변환하지 않습니다. 각 챕터의 수강 완료 개수는 해당 챕터의 강의만 셉니다.
+
+공통 슬라이드 본문 레이아웃은 기존 section00-v0.1.css를 함께 사용합니다. 새 강의는 lesson-deck 클래스를 사용하며 섹션별 복제 스타일을 만들지 않습니다.
 
 ## 최신 커리큘럼
 
@@ -50,6 +60,8 @@
 
 ## 확인과 운영
 
+- node tests/validate-section01.cjs
+- node tests/validate-player.cjs
 - node tests/validate-orientation.cjs
 - node tests/validate-section00.cjs
 - node tests/validate-public-boundary.cjs

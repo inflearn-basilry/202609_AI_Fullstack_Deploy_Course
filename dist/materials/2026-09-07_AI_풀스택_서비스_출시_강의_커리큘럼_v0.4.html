@@ -1322,7 +1322,8 @@
         '</table>' +
         '<footer class="section-footer">' +
           '<div class="mission"><strong>' + escapeHtml(section.mission) + '</strong><p>' + escapeHtml(section.missionText) + '</p></div>' +
-          '<div class="output"><small>SECTION OUTPUT</small><b>' + escapeHtml(section.output) + '</b></div>' +
+          '<div class="output"><small>SECTION OUTPUT</small><b>' + escapeHtml(section.output) + '</b>' +
+            (section.no === '01' ? '<p><a href="../index.html#section01">섹션 01 슬라이드·실습 자료 열기</a></p>' : '') + '</div>' +
         '</footer>' +
       '</article>';
     }
