@@ -4,7 +4,7 @@
 // CI: node tests/validate-linen-theme.cjs
 // Local migration check: node tests/validate-linen-theme.cjs --compare-head
 // Candidate run before copying: node /candidate/validate-linen-theme.cjs --root /repo
-// --compare-head reads ONLY the seven named public deck sources from git HEAD.
+// --compare-head reads ONLY the eleven pre-existing public deck sources from git HEAD.
 // This checker does not claim browser layout, keyboard or live-storage coverage.
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
@@ -83,7 +83,10 @@ const datasetNames = [
   ['lesson-0-3-v0.1.js', 9], ['lesson-0-4-v0.1.js', 9],
   ['lesson-0-5-v0.1.js', 14], ['lesson-0-6-v0.1.js', 12],
   ['lesson-1-1-v0.1.js', 10], ['lesson-1-2-v0.1.js', 10],
-  ['lesson-1-3-v0.1.js', 10], ['lesson-1-4-v0.1.js', 10]
+  ['lesson-1-3-v0.1.js', 10], ['lesson-1-4-v0.1.js', 10],
+  ['lesson-2-1-v0.1.js', 10], ['lesson-2-2-v0.1.js', 10],
+  ['lesson-2-3-v0.1.js', 10], ['lesson-2-4-v0.1.js', 10],
+  ['lesson-2-5-v0.1.js', 10]
 ];
 const independentName = '2026-09-07_0-1_이_강의가_해결하는_문제_강의슬라이드_v0.1.html';
 const independentFile = path.join(materials, independentName);
@@ -103,7 +106,7 @@ check('public file inventory and crawl policy', () => {
   files = walk(dist);
   htmlFiles = files.filter(file => file.endsWith('.html'));
   cssFiles = files.filter(file => file.endsWith('.css'));
-  assert.equal(htmlFiles.length, 17, 'Expected catalog, eleven decks and five reference/redirect pages');
+  assert.equal(htmlFiles.length, 22, 'Expected catalog, sixteen decks and five reference/redirect pages');
   for (const file of htmlFiles) {
     const html = read(file);
     const robotTags = [...html.matchAll(/<meta\b[^>]*>/gi)].map(match => attrs(match[0]));
@@ -226,7 +229,7 @@ check('project-relative local links, CSS URLs and actual WOFF2 files', () => {
   assert(licenses.some(file => /SIL OPEN FONT LICENSE|SIL Open Font License/.test(read(file))), 'Public local-font OFL license missing');
 });
 
-check('all eleven decks and 115 valid public slide bodies', () => {
+check('all sixteen decks and 165 valid public slide bodies', () => {
   let total = 0;
   for (const [name, count] of datasetNames) {
     const data = readData(read(path.join(materials, name)), name);
@@ -245,11 +248,11 @@ check('all eleven decks and 115 valid public slide bodies', () => {
     assert(slide.attrs['data-title'], '0-1 #' + (index + 1) + ' has no slide title');
     assert(/<h[12]\b/.test(slide.content), '0-1 #' + (index + 1) + ' has no heading');
   });
-  assert.equal(total + inline.length, 115);
+  assert.equal(total + inline.length, 165);
   const pages = htmlFiles.filter(file => /_강의슬라이드_v0\.1\.html$/.test(file));
-  assert.equal(pages.length, 11);
+  assert.equal(pages.length, 16);
   const ids = pages.map(file => read(file).match(/<body\b[^>]*\bdata-lesson-page=["']([^"']+)["']/)?.[1]).sort();
-  assert.deepEqual(ids, ['0-0', '0-1', '0-2', '0-3', '0-4', '0-5', '0-6', '1-1', '1-2', '1-3', '1-4']);
+  assert.deepEqual(ids, ['0-0', '0-1', '0-2', '0-3', '0-4', '0-5', '0-6', '1-1', '1-2', '1-3', '1-4', '2-1', '2-2', '2-3', '2-4', '2-5']);
 });
 
 check('public JS syntax and original progress-key contract', () => {
@@ -267,11 +270,11 @@ check('public JS syntax and original progress-key contract', () => {
   assert(/data-warning|dataset\.warning/.test(progress), 'Explicit persistence warning state missing');
 });
 
-if (compareHead) check('local-only migration comparison: all 75 slide contents against git HEAD', () => {
+if (compareHead) check('local-only migration comparison: all 115 pre-existing slide contents against git HEAD', () => {
   const head = relative => cp.execFileSync('git', ['show', 'HEAD:' + relative], {
     cwd: root, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024, windowsHide: true
   });
-  for (const [name] of datasetNames.filter(([file]) => !file.startsWith('lesson-1-'))) {
+  for (const [name] of datasetNames.filter(([file]) => !file.startsWith('lesson-2-'))) {
     const relative = 'dist/materials/' + name;
     const before = readData(head(relative), relative), after = readData(read(path.join(materials, name)), relative);
     assert.equal(after.slides.length, before.slides.length, name + ': slide count changed from HEAD');
@@ -299,4 +302,4 @@ for (const {name, run} of checks) {
   catch (error) { failures++; console.error('FAIL: ' + name + '\n  ' + error.message); }
 }
 if (failures) { console.error('FAILED: ' + failures + '/' + checks.length + ' check groups.'); process.exitCode = 1; }
-else console.log('PASS: Linen Blue source validation; 17 HTML pages / 11 decks / 115 slides / ' + fontCount + ' local WOFF2 font(s) / ' + linkCount + ' local references. Browser layout and interaction QA remain separate.');
+else console.log('PASS: Linen Blue source validation; 22 HTML pages / 16 decks / 165 slides / ' + fontCount + ' local WOFF2 font(s) / ' + linkCount + ' local references. Browser layout and interaction QA remain separate.');

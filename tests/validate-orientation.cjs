@@ -92,15 +92,18 @@ const landing = read(path.join(root, 'dist', 'index.html'));
 const catalogMatch = landing.match(/<section[^>]+id="slides"[^>]*>([\s\S]*?)<\/section>/);
 assert(catalogMatch, 'Missing unified lesson catalog');
 const catalog = catalogMatch[1];
-assert.equal((catalog.match(/<details class="chapter"/g) || []).length, 2);
-assert.equal((catalog.match(/<summary>/g) || []).length, 2);
-assert.equal((catalog.match(/<\/details>/g) || []).length, 2);
+assert.equal((catalog.match(/<details class="chapter"/g) || []).length, 3);
+for (const chapter of catalog.matchAll(/<details\b[^>]*class="chapter"[^>]*>/g)) {
+  assert(!/\sopen(?:\s|=|>)/i.test(chapter[0]), 'Chapters must be collapsed by default');
+}
+assert.equal((catalog.match(/<summary>/g) || []).length, 3);
+assert.equal((catalog.match(/<\/details>/g) || []).length, 3);
 assert(!landing.includes('<details class="lesson"'));
 assert(!landing.includes('script-catalog'));
 assert(!/<section[^>]+id="scripts"/.test(landing));
 assert(landing.includes('<span class="catalog-anchor" id="scripts"'), 'Old script URLs must still land at the catalog');
 const rows = [...catalog.matchAll(/<article class="lesson-row" data-lesson="([^"]+)"[^>]*>([\s\S]*?)<\/article>/g)];
-assert.deepEqual(rows.map(row => row[1]), ['0-0', '0-1', '0-2', '0-3', '0-4', '0-5', '0-6', '1-1', '1-2', '1-3', '1-4']);
+assert.deepEqual(rows.map(row => row[1]), ['0-0', '0-1', '0-2', '0-3', '0-4', '0-5', '0-6', '1-1', '1-2', '1-3', '1-4', '2-1', '2-2', '2-3', '2-4', '2-5']);
 for (const [_, id, html] of rows) {
   // Authored slides retain v0.2 IDs; the v0.4 curriculum is checked separately.
   assert(landing.includes('v0.2 편성으로 제작된 자료'));
@@ -116,7 +119,7 @@ for (const [_, id, html] of rows) {
 for (const summary of catalog.matchAll(/<summary>([\s\S]*?)<\/summary>/g)) {
   assert(!/<(?:a|button|input)\b/.test(summary[1]), 'No interactive controls inside chapter toggle');
 }
-assert.equal((catalog.match(/_강의슬라이드_v0\.1\.html/g) || []).length, 11);
+assert.equal((catalog.match(/_강의슬라이드_v0\.1\.html/g) || []).length, 16);
 assert.equal((catalog.match(/_스크립트_스토리보드_v0\.1\.html/g) || []).length, 0);
 assert(!landing.includes('대본'));
 for (const file of sourceFiles.filter(file => file.includes('0-0_') || file.includes('0-1_') || file.endsWith('커리큘럼_v0.2.html'))) {

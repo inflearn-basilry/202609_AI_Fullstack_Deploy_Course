@@ -82,14 +82,14 @@ function progressSession(storage, mode='ok', initial='loading', page='lesson', m
   const docEvents={}, winEvents={}, all=[];
   const body=new Element(); if(page==='lesson')body.dataset.lessonPage='0-2';
   const main=new Element();
-  const rowIds=Array.from({length:7},(_,n)=>'0-'+n).concat(multiple?['1-1','1-2','1-3','1-4']:[]);
+  const rowIds=Array.from({length:7},(_,n)=>'0-'+n).concat(multiple?['1-1','1-2','1-3','1-4','2-1','2-2','2-3','2-4','2-5']:[]);
   const rows=page==='catalog' ? rowIds.map(id=>{
     const row=new Element('article'); row.className='lesson-row'; row.dataset.lesson=id;
     const actions=new Element(); actions.className='lesson-actions'; row.append(actions);
     row.querySelector=selector=>selector==='.lesson-actions'?actions:null;
     return row;
   }) : [];
-  const chapters=(multiple?['0','1']:['0']).map(section=>{
+  const chapters=(multiple?['0','1','2']:['0']).map(section=>{
     const chapterBody=new Element();
     const chapter=new Element();
     chapter.querySelector=selector=>selector==='.chapter-body'?chapterBody:null;
@@ -159,16 +159,23 @@ assert.equal(progressSession(rowStore,'ok','loading','catalog').count.textConten
 rowPage.inputs[0].checked=false; rowPage.inputs[0].events.change();
 assert.equal(rowPage.count.textContent,'수강 완료 1 / 7');
 assert.equal(rowStore.get('unrelated.app'),'keep');
-const multiStore=new Map([['basilry.ai-fullstack.progress.v1:0-0','1'],['basilry.ai-fullstack.progress.v1:1-2','1']]);
+const multiStore=new Map([['basilry.ai-fullstack.progress.v1:0-0','1'],['basilry.ai-fullstack.progress.v1:1-2','1'],['basilry.ai-fullstack.progress.v1:2-3','1']]);
 const multi=progressSession(multiStore,'ok','complete','catalog',true);
-assert.equal(multi.inputs.length,11);
-assert.deepEqual(multi.counts.map(node=>node.textContent),['수강 완료 1 / 7','수강 완료 1 / 4']);
+assert.equal(multi.inputs.length,16);
+assert.deepEqual(multi.counts.map(node=>node.textContent),['수강 완료 1 / 7','수강 완료 1 / 4','수강 완료 1 / 5']);
 multi.inputs[7].checked=true;multi.inputs[7].events.change();
-assert.deepEqual(multi.counts.map(node=>node.textContent),['수강 완료 1 / 7','수강 완료 2 / 4']);
+assert.deepEqual(multi.counts.map(node=>node.textContent),['수강 완료 1 / 7','수강 완료 2 / 4','수강 완료 1 / 5']);
 assert.equal(multiStore.get('basilry.ai-fullstack.progress.v1:0-0'),'1');
 multiStore.delete('basilry.ai-fullstack.progress.v1:1-2');
 multi.winEvents.storage({key:'basilry.ai-fullstack.progress.v1:1-2'});
-assert.deepEqual(multi.counts.map(node=>node.textContent),['수강 완료 1 / 7','수강 완료 1 / 4']);
+assert.deepEqual(multi.counts.map(node=>node.textContent),['수강 완료 1 / 7','수강 완료 1 / 4','수강 완료 1 / 5']);
 assert.equal(progressSession(multiStore,'ok','complete','catalog',true).inputs[7].checked,true);
-console.log('PASS: per-chapter completion totals and cross-tab section 00/01 isolation.');
+multi.inputs[11].checked=true;multi.inputs[11].events.change();
+assert.equal(multiStore.get('basilry.ai-fullstack.progress.v1:2-1'),'1');
+assert.deepEqual(multi.counts.map(node=>node.textContent),['수강 완료 1 / 7','수강 완료 1 / 4','수강 완료 2 / 5']);
+multiStore.delete('basilry.ai-fullstack.progress.v1:2-3');
+multi.winEvents.storage({key:'basilry.ai-fullstack.progress.v1:2-3'});
+assert.deepEqual(multi.counts.map(node=>node.textContent),['수강 완료 1 / 7','수강 완료 1 / 4','수강 완료 1 / 5']);
+assert.equal(progressSession(multiStore,'ok','complete','catalog',true).inputs[11].checked,true);
+console.log('PASS: per-chapter completion totals and cross-tab section 00/01/02 isolation.');
 console.log('PASS: section 00 = 7 lessons / ' + (newSlides + 20) + ' slides / 56 minutes; ' + pages + ' noindex pages; ' + links + ' local links; JS syntax; storage persistence/uncheck/cross-tab/denied/quota/corruption/isolation; inline row controls and existing progress migration.');

@@ -66,5 +66,5 @@ const workbook=read('section01-prd-workbook.md');
 for(const phrase of ['1-1.','1-2.','1-3.','1-4.','AC-01','AC-06','검증 전 가정','한 페이지로 요약할 PRD 틀','SignalDesk PRD 요약 예시'])assert(workbook.includes(phrase),phrase);
 assert(landing.includes('섹션 00은 v0.2 편성'));
 assert(landing.includes('섹션 01은 v0.4'));
-assert.equal((landing.match(/data-chapter="/g)||[]).length,2);
+assert.equal((landing.match(/data-chapter="/g)||[]).length,3);
 console.log('PASS: section 01 matches curriculum v0.4: 4 lessons / 40 slides / 35 minutes; titles, timing, structured content, shared player and PRD workbook.');

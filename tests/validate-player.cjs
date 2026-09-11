@@ -7,7 +7,7 @@ const root = path.resolve(__dirname, '..');
 const materials = path.join(root, 'dist/materials');
 const player = fs.readFileSync(path.join(root, 'dist/assets/course-player.js'), 'utf8');
 const pages = fs.readdirSync(materials).filter(name => name.includes('강의슬라이드') && name.endsWith('.html'));
-assert.equal(pages.length, 11);
+assert.equal(pages.length, 16);
 
 function fixture(data, html, id) {
   let doc;
@@ -71,7 +71,7 @@ function fixture(data, html, id) {
     assert.equal((html.match(/href="\.\.\/assets\/course-player.css"/g)||[]).length,1);
     assert(!/class="controls"|id="(?:prev|next|counter|fullscreen|status)"|addEventListener/.test(html), page+' duplicates player UI/logic');
     const id = html.match(/data-lesson-page="([^"]+)"/)[1];
-    const source = html.match(/src="((?:orientation-v0\.1|lesson-(?:0-[2-6]|1-[1-4])-v0\.1)\.js)"/)?.[1];
+    const source = html.match(/src="((?:orientation-v0\.1|lesson-(?:0-[2-6]|1-[1-4]|2-[1-5])-v0\.1)\.js)"/)?.[1];
     let data;
     if (source) {
       const scope = {window:{}};
@@ -133,11 +133,11 @@ function fixture(data, html, id) {
     f.timers.forEach(fn=>fn());
     assert(f.walk(f.body).find(e=>e.className==='help-toast').hidden);
   }
-  assert.equal(total,115);
+  assert.equal(total,165);
   for (const name of ['orientation-v0.1.css','lesson-0-1.css']) {
     const css=fs.readFileSync(path.join(materials,name),'utf8');
     assert(!/\.controls\b|\.help-toast\b|\.progress\s*\{/.test(css),name+' duplicates player styles');
     assert(css.includes('--slide-scale'));
   }
-  console.log('PASS: shared player on 11 decks / 115 slides; home, single mount, bounds, hash, keyboard guards, touch, hide/restore, mobile scale and fullscreen success/fallback fixtures.');
+  console.log('PASS: shared player on 16 decks / 165 slides; home, single mount, bounds, hash, keyboard guards, touch, hide/restore, mobile scale and fullscreen success/fallback fixtures.');
 })().catch(error=>{console.error(error);process.exitCode=1;});
